@@ -1,10 +1,10 @@
 import React from 'react';
 import './style.less';
-import { routes } from '../routes';
-import { Header } from "./header";
+import { routes } from '../../routes';
+import { Header } from "../header";
 import { Switch, Route, Redirect } from 'react-router-dom';
-import { NotFoundPage } from "../pages";
-import { SideBar } from "./sidebar";
+import { NotFoundPage } from "../../pages";
+import { SideBar } from "../sidebar";
 
 export const AppContainer = () => {
   return (

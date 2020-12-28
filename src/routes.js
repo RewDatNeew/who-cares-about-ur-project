@@ -1,4 +1,3 @@
-import React from 'react';
 import { FirstPage, HomePage } from "./pages";
 
 export const routes = [
