@@ -5,6 +5,7 @@ import { Route, BrowserRouter, Router } from 'react-router-dom';
 import { createBrowserHistory } from 'history';
 import store from './store';
 import { AppContainer } from './container/app';
+import './styles/style.less';
 
 const history = createBrowserHistory();
 
