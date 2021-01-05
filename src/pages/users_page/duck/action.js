@@ -22,7 +22,6 @@ export const getUsers = (params) => {
 
 export const addUser = (user) => {
     const {
-        id,
         name,
         location,
         age
@@ -30,7 +29,6 @@ export const addUser = (user) => {
 
     return async function () {
         axios.post(`${urls.USERS}`, {
-            id: id,
             name: name,
             location: location,
             age: age,
