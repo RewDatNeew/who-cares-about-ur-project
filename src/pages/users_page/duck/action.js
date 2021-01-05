@@ -14,14 +14,30 @@ export const getUsers = (params) => {
                         users: response.data,
                     },
                 });
-            })
-            .catch((err) => {
-                try {
-                    const { data } = JSON.parse(JSON.stringify(err.response));
-                    console.log('isResponse', data);
-                } catch (e) {
-                    console.log(e.toString());
-                }
-            });
+            }).catch(error => {
+            console.log(error);
+        });
     };
+}
+
+export const addUser = (user) => {
+    const {
+        id,
+        name,
+        location,
+        age
+    } = user;
+
+    return async function () {
+        axios.post(`${urls.USERS}`, {
+            id: id,
+            name: name,
+            location: location,
+            age: age,
+        }).then(resp => {
+            console.log(resp.data);
+        }).catch(error => {
+            console.log(error);
+        });
+    }
 }
