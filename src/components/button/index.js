@@ -1,17 +1,30 @@
 import React from 'react';
-import { Button, Tooltip } from 'antd';
+import Button from '@material-ui/core/Button';
 
-// types: primary, dashed, text, link
+// styles: default, primary, secondary, disabled
+// type: text, outlined, contained
 
-export const ButtonComponent = ({
-    type = 'primary', tooltip = '', icon = {}, title = ''
-}) => {
-    console.log({title})
+export const ButtonComponent = (props) => {
+    const {
+        style = 'primary',
+        type = 'contained',
+        title = '',
+        disabled = false,
+        size = 'small',
+        icon = '',
+        onClick = () => console.log('onClick')
+    } = props;
+
     return (
-        <Tooltip title={tooltip ? tooltip : null}>
-            <Button type={type} icon={icon ? icon : null}>
-                {title}
-            </Button>
-        </Tooltip>
+        <Button
+            variant={type}
+            color={style}
+            size={size}
+            disabled={disabled}
+            startIcon={icon ? icon : ''}
+            onClick={onClick}
+        >
+            {title}
+        </Button>
     )
 }

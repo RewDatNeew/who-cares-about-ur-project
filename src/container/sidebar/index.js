@@ -7,7 +7,7 @@ export const SideBar = () => {
     return (
         <div className="sidebar">
             <nav>
-                <ul>
+                <ul className="list">
                     {routes.map((m, i) => <ItemNavigation {...m} key={i} />)}
                 </ul>
             </nav>

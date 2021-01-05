@@ -1,14 +1,14 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import './style.less';
 import { Button } from "../../components";
+import './style.less';
 
 const HomePage = (props) => {
     // const updateStore = useUpdateStore({ type: types.HOME_UPDATE })
 
     return (
         <div className="home-page">
-            <Button type='primary' title="hello" />
+            <Button type='contained' title="hello" />
         </div>
     )
 }
