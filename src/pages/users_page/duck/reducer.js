@@ -1,7 +1,7 @@
 import { actionTypes as types } from '../../../constants';
 
 const initialState = {
-
+    users: [],
 };
 
 export const users = (state = initialState, action) => {

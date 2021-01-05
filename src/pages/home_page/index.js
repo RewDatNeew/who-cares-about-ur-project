@@ -1,6 +1,5 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Button } from "../../components";
 import './style.less';
 
 const HomePage = (props) => {
@@ -8,7 +7,7 @@ const HomePage = (props) => {
 
     return (
         <div className="home-page">
-            <Button type='contained' title="hello" />
+            Home Page
         </div>
     )
 }
