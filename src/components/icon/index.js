@@ -4,6 +4,7 @@ import './style.less';
 import { ReactComponent as ProjectIcon } from './../../svg/project-icon.svg';
 import { ReactComponent as HomeIcon } from './../../svg/home.svg';
 import { ReactComponent as SackIcon } from './../../svg/sack-icon.svg';
+import { ReactComponent as UsersIcon } from './../../svg/users-icon.svg';
 
 export const Icon = ({ size = '1em', fill = 'currentColor', name, cn = '' }) => {
     const svgIconProps = { width: size, height: size, fill, viewBox: '0 0 24 24', className: cn };
@@ -11,6 +12,7 @@ export const Icon = ({ size = '1em', fill = 'currentColor', name, cn = '' }) => 
         project: ProjectIcon,
         home: HomeIcon,
         sack: SackIcon,
+        users: UsersIcon,
     }[name];
 
     return (
