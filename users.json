@@ -7,12 +7,6 @@
       "age": 27
     },
     {
-      "id": 2,
-      "name": "Maria",
-      "location": "Russia",
-      "age": 26
-    },
-    {
       "name": "Alice",
       "location": "Smith",
       "age": "33",
@@ -21,8 +15,20 @@
     {
       "name": "John",
       "location": "Smith",
-      "age": "22",
+      "age": "44",
       "id": 7
+    },
+    {
+      "name": "Maria",
+      "location": "Moscow",
+      "age": "27",
+      "id": 8
+    },
+    {
+      "name": "Dasha",
+      "location": "Moscow",
+      "age": "26",
+      "id": 9
     }
   ]
 }

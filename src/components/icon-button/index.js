@@ -7,10 +7,11 @@ export const IconButtonComponent = (props) => {
         onClick = () => console.log('onClick'),
         fill = '#0000008a',
         size = 18,
+        name = '',
     } = props;
     return (
             <IconButton onClick={onClick}>
-               <Icon name="delete" fill={fill} size={size} />
+               <Icon name={name} fill={fill} size={size} />
             </IconButton>
     );
 }

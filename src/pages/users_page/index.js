@@ -1,10 +1,10 @@
 import React, { useEffect } from 'react';
 import { actionTypes as types } from '../../constants';
 import { connect } from 'react-redux';
-import { IconButton, Table } from "../../components";
+import {IconButton, Input, Modal, Table} from "../../components";
 import { useUpdateStore } from "../../hooks";
 import { isEmpty } from "../../helpers";
-import { getUsers, addUser, deleteUser } from "./duck/action";
+import { getUsers, addUser, deleteUser, editUser } from "./duck/action";
 import { ConfigControl } from "./components/config-control";
 import './style.less';
 
@@ -13,9 +13,12 @@ const UsersPage = (props) => {
 
     const {
         users = [],
+        id,
         name = '',
         location = '',
         age = 0,
+        isOpenModal = false,
+        currentUser = {},
     } = props.users;
 
     const handleGetUsers = () => {
@@ -50,11 +53,12 @@ const UsersPage = (props) => {
         name,
         location,
         age,
+        id,
     }
 
     const handleAddUser = async () => {
         await props.dispatch(addUser(user));
-        props.dispatch(getUsers());
+        handleGetUsers()
     }
 
     const handleDeleteRow = async (row) => {
@@ -62,7 +66,20 @@ const UsersPage = (props) => {
             id,
         } = row;
         await props.dispatch(deleteUser(id));
-        props.dispatch(getUsers());
+        handleGetUsers()
+    }
+
+    const handleToggleModal = (row) => {
+        const payload = {
+            isOpenModal: !isOpenModal,
+            currentUser: {
+                id: row.id,
+                name: row.name,
+                location: row.location,
+                age: row.age,
+            }
+        }
+        updateStore(payload);
     }
 
     const columns = [
@@ -79,11 +96,35 @@ const UsersPage = (props) => {
             accessor: 'age',
         },
         {
-            id: 'id',
+            id: 'id-edit',
             Header: '',
-            accessor: (row) => <IconButton fill="#f0f8ff" onClick={() => handleDeleteRow(row)} />,
+            accessor: (row) => <IconButton name="edit" fill="#f0f8ff" onClick={() => handleToggleModal(row)} />,
+        },
+        {
+            id: 'id-delete',
+            Header: '',
+            accessor: (row) => <IconButton name="delete" fill="#f0f8ff" onClick={() => handleDeleteRow(row)} />,
         }
     ]
+
+    const handleCloseModal = () => {
+        updateStore({
+            isOpenModal: false,
+        })
+    }
+
+    const handleEditUser = async () => {
+        const editedUser = {
+            id: currentUser.id,
+            name: name || currentUser.name,
+            location: location || currentUser.location,
+            age: age || currentUser.age,
+        }
+        await props.dispatch(editUser(editedUser));
+        await handleCloseModal();
+        handleGetUsers()
+    }
+
 
     return (
         <div className="contentGrid users-page">
@@ -96,6 +137,38 @@ const UsersPage = (props) => {
             <span className="scrollBox">
                 {!isEmpty(users) ? <Table columns={columns} data={users} /> : null}
             </span>
+            {isOpenModal
+                ? <Modal
+                    title="Edit User"
+                    actionTitle="Edit user"
+                    modalAction={handleEditUser}
+                    closeModal={handleCloseModal}
+                >
+                    <div className="input-zone">
+                        <Input
+                            currentValue={currentUser.name}
+                            style="secondary"
+                            label='name'
+                            type="search"
+                            onChange={handleChangeName}
+                        />
+                        <Input
+                            currentValue={currentUser.location}
+                            style="secondary"
+                            label='location'
+                            type="search"
+                            onChange={handleChangeLocation}
+                        />
+                        <Input
+                            currentValue={currentUser.age}
+                            style="secondary"
+                            label='age'
+                            type='number'
+                            onChange={handleChangeAge}
+                        />
+                    </div>
+                  </Modal>
+                : null}
         </div>
     )
 }

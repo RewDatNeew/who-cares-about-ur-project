@@ -4,3 +4,4 @@ export { Table } from './table';
 export { Input } from './input';
 export { Config } from './config';
 export { IconButtonComponent as IconButton } from './icon-button';
+export { Modal } from './modal';

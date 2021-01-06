@@ -41,10 +41,30 @@ export const addUser = (user) => {
 
 export const deleteUser = (id) => {
     return async function () {
-        axios.delete(`http://localhost:3000/users/${id}`)
+        axios.delete(`${urls.USERS}/${id}`)
             .then(resp => {
                 console.log(resp.data)
             }).catch(error => {
+            console.log(error);
+        });
+    }
+}
+
+export const editUser = (user) => {
+    const {
+        id,
+        name,
+        location,
+        age
+    } = user
+    return async function () {
+        axios.put(`${urls.USERS}/${id}`, {
+            name: name,
+            location: location,
+            age: age
+        }).then(resp => {
+            console.log(resp.data);
+        }).catch(error => {
             console.log(error);
         });
     }

@@ -14,9 +14,9 @@ export const ConfigControl = (props) => {
         <Config headerTitle='Config' iconName="settings">
             <div className="config">
                 <div className="input-zone">
-                    <Input label='name' type="search" onChange={handleChangeName}/>
-                    <Input label='location' type="search" onChange={handleChangeLocation}/>
-                    <Input label='age' type='number' onChange={handleChangeAge}/>
+                    <Input style="primary" label='name' type="search" onChange={handleChangeName}/>
+                    <Input style="primary" label='location' type="search" onChange={handleChangeLocation}/>
+                    <Input style="primary" label='age' type='number' onChange={handleChangeAge}/>
                 </div>
                 <Button type='contained' title="Add User" size="small" onClick={handleAddUser} />
             </div>
