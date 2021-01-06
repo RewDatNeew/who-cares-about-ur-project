@@ -7,7 +7,6 @@ export const getUsers = (params) => {
             params,
         })
             .then((response) => {
-                console.log({response})
                 dispatch({
                     type: types.USERS_UPDATE,
                     payload: {
@@ -35,6 +34,17 @@ export const addUser = (user) => {
         }).then(resp => {
             console.log(resp.data);
         }).catch(error => {
+            console.log(error);
+        });
+    }
+}
+
+export const deleteUser = (id) => {
+    return async function () {
+        axios.delete(`http://localhost:3000/users/${id}`)
+            .then(resp => {
+                console.log(resp.data)
+            }).catch(error => {
             console.log(error);
         });
     }

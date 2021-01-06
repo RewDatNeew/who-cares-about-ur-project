@@ -6,7 +6,7 @@ const HomePage = (props) => {
     // const updateStore = useUpdateStore({ type: types.HOME_UPDATE })
 
     return (
-        <div className="home-page">
+        <div className="contentGrid home-page">
             Home Page
         </div>
     )

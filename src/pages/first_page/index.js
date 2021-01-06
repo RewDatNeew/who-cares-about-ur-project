@@ -2,7 +2,7 @@ import React from 'react';
 
 const FirstPage = () => {
     return (
-        <div>
+        <div className="contentGrid">
             FIRST PAGE
         </div>
     )

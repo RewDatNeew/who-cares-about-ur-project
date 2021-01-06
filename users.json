@@ -13,52 +13,16 @@
       "age": 26
     },
     {
-      "name": "",
-      "location": "fghfghd",
-      "age": "",
-      "id": 4
-    },
-    {
-      "name": "fghdh",
-      "location": "fghfghd",
-      "age": "",
-      "id": 5
-    },
-    {
       "name": "Alice",
       "location": "Smith",
       "age": "33",
       "id": 6
     },
     {
-      "name": "ssd",
-      "location": "sadas",
-      "age": "4",
-      "id": 7
-    },
-    {
-      "name": "ssd",
-      "location": "sadas",
-      "age": "4",
-      "id": 8
-    },
-    {
-      "name": "ssd",
-      "location": "sadasdsf",
-      "age": "4",
-      "id": 9
-    },
-    {
-      "name": "asdasd",
-      "location": "asdas",
+      "name": "John",
+      "location": "Smith",
       "age": "22",
-      "id": 10
-    },
-    {
-      "name": "aaa",
-      "location": "aaa",
-      "age": "13",
-      "id": 11
+      "id": 7
     }
   ]
 }

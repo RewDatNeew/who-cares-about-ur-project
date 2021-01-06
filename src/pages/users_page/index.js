@@ -1,37 +1,15 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect } from 'react';
 import { actionTypes as types } from '../../constants';
 import { connect } from 'react-redux';
-import { Button, Table } from "../../components";
+import { IconButton, Table } from "../../components";
 import { useUpdateStore } from "../../hooks";
 import { isEmpty } from "../../helpers";
-import { getUsers, addUser } from "./duck/action";
-import { Config } from "./components";
-
+import { getUsers, addUser, deleteUser } from "./duck/action";
+import { ConfigControl } from "./components/config-control";
 import './style.less';
 
-const columns = [
-    {
-        Header: 'Name',
-        accessor: 'name',
-    },
-    {
-        Header: 'Location',
-        accessor: 'location',
-    },
-    {
-        Header: 'Age',
-        accessor: 'age',
-    }
-]
-
 const UsersPage = (props) => {
-
     const updateStore = useUpdateStore({ type: types.USERS_UPDATE })
-    const [openForm, setOpenForm] = useState(false)
-
-    const handleOpenForm = () => {
-        setOpenForm(!openForm);
-    }
 
     const {
         users = [],
@@ -79,16 +57,45 @@ const UsersPage = (props) => {
         props.dispatch(getUsers());
     }
 
+    const handleDeleteRow = async (row) => {
+        const {
+            id,
+        } = row;
+        await props.dispatch(deleteUser(id));
+        props.dispatch(getUsers());
+    }
+
+    const columns = [
+        {
+            Header: 'Name',
+            accessor: 'name',
+        },
+        {
+            Header: 'Location',
+            accessor: 'location',
+        },
+        {
+            Header: 'Age',
+            accessor: 'age',
+        },
+        {
+            id: 'id',
+            Header: '',
+            accessor: (row) => <IconButton fill="#f0f8ff" onClick={() => handleDeleteRow(row)} />,
+        }
+    ]
+
     return (
-        <div className="users-page">
-            <span className="btn"><Button type='contained' title="Form Control" onClick={handleOpenForm} /></span>
-            { openForm ? <Config
+        <div className="contentGrid users-page">
+            <ConfigControl
                 handleChangeName={handleChangeName}
                 handleChangeLocation={handleChangeLocation}
                 handleChangeAge={handleChangeAge}
                 handleAddUser={handleAddUser}
-            /> : null }
-            {!isEmpty(users) ? <Table columns={columns} data={users} /> : null}
+            />
+            <span className="scrollBox">
+                {!isEmpty(users) ? <Table columns={columns} data={users} /> : null}
+            </span>
         </div>
     )
 }
