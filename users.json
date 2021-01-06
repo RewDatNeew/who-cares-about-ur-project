@@ -1,10 +1,10 @@
 {
   "users": [
     {
-      "id": 1,
       "name": "Andrew",
       "location": "Russia",
-      "age": 27
+      "age": "11",
+      "id": 1
     },
     {
       "name": "Alice",
@@ -13,7 +13,7 @@
       "id": 6
     },
     {
-      "name": "John",
+      "name": "Roy",
       "location": "Smith",
       "age": "44",
       "id": 7
@@ -31,10 +31,22 @@
       "id": 9
     },
     {
-      "name": "Stasss",
-      "location": "Moscow",
-      "age": "28",
-      "id": 10
+      "name": "Horse",
+      "location": "Rio",
+      "age": "22",
+      "id": 11
+    },
+    {
+      "name": "Egor",
+      "location": "Chicago",
+      "age": "22",
+      "id": 12
+    },
+    {
+      "name": "Dmitry",
+      "location": "London",
+      "age": "11",
+      "id": 13
     }
   ]
 }

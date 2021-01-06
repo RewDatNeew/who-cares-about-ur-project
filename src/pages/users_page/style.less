@@ -1,9 +1,17 @@
 .users-page {
   display: flex;
   flex-direction: column;
+
   table {
     th:nth-last-child(-n+2) {
       width: 30px;
+    }
+  }
+
+  .input-zone {
+    display: flex;
+    & * > {
+      padding-left: 1rem;
     }
   }
 }

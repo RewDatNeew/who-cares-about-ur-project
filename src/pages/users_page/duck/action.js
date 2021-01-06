@@ -3,7 +3,7 @@ import axios from 'axios';
 
 export const getUsers = (params) => {
     return async function (dispatch) {
-        axios.get(`${urls.USERS}`, {
+        await axios.get(`${urls.USERS}`, {
             params,
         })
             .then((response) => {
@@ -27,7 +27,7 @@ export const addUser = (user) => {
     } = user;
 
     return async function () {
-        axios.post(`${urls.USERS}`, {
+        await axios.post(`${urls.USERS}`, {
             name: name,
             location: location,
             age: age,
@@ -41,7 +41,7 @@ export const addUser = (user) => {
 
 export const deleteUser = (id) => {
     return async function () {
-        axios.delete(`${urls.USERS}/${id}`)
+       await axios.delete(`${urls.USERS}/${id}`)
             .then(resp => {
                 console.log(resp.data)
             }).catch(error => {
@@ -58,7 +58,7 @@ export const editUser = (user) => {
         age
     } = user
     return async function () {
-        axios.put(`${urls.USERS}/${id}`, {
+        await axios.put(`${urls.USERS}/${id}`, {
             name: name,
             location: location,
             age: age
@@ -67,5 +67,21 @@ export const editUser = (user) => {
         }).catch(error => {
             console.log(error);
         });
+    }
+}
+
+export const searchUser = (search) => {
+    return async function (dispatch) {
+        await axios.get(`${urls.USERS}?q=${search}`)
+            .then(resp => {
+                dispatch({
+                    type: types.USERS_UPDATE,
+                    payload: {
+                        searchResult: resp.data,
+                    },
+                });
+            }).catch(error => {
+                console.log(error);
+            });
     }
 }

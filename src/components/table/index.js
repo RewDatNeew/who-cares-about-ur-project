@@ -1,9 +1,11 @@
 import React from 'react';
 import { useTable } from 'react-table'
+import { isEmpty } from "../../helpers";
 import './style.less';
 
 export const Table = (props) => {
-    const { columns, data } = props;
+    const { columns, data, searchResult } = props;
+    const result = !isEmpty(searchResult) ? searchResult : data;
     const {
         getTableProps,
         getTableBodyProps,
@@ -12,7 +14,7 @@ export const Table = (props) => {
         prepareRow,
     } = useTable({
         columns,
-        data,
+        data: result,
     })
 
     return (

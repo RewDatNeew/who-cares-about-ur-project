@@ -1,24 +1,22 @@
 import React from 'react';
-import { Button, Input, Config } from "../../../../components";
+import { Button, Config, Input } from "../../../../components";
 import './style.less';
 
 export const ConfigControl = (props) => {
     const {
-        handleChangeName = () => console.log('handleChangeName'),
-        handleChangeLocation = () => console.log('handleChangeLocation'),
-        handleChangeAge = () => console.log('handleChangeAge'),
-        handleAddUser = () => console.log('handleAddUser'),
+        handleOpenAdding = () => console.log('handleOpenAdding'),
+        handleSendSearch = () => console.log('handleSendSearch'),
+        handleSearch = () => console.log('handleSearch'),
     } = props;
 
     return (
         <Config headerTitle='Config' iconName="settings">
             <div className="config">
-                <div className="input-zone">
-                    <Input style="primary" label='name' onChange={handleChangeName}/>
-                    <Input style="primary" label='location' onChange={handleChangeLocation}/>
-                    <Input style="primary" label='age' type='number' onChange={handleChangeAge}/>
+                <Input style="primary" label='search' onChange={handleSearch}/>
+                <div>
+                    <Button type='contained' title="Search" size="small" onClick={handleSendSearch} />
+                    <Button type='contained' title="Add User" size="small" onClick={handleOpenAdding} />
                 </div>
-                <Button type='contained' title="Add User" size="small" onClick={handleAddUser} />
             </div>
         </Config>
 
