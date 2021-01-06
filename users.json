@@ -29,6 +29,12 @@
       "location": "Moscow",
       "age": "26",
       "id": 9
+    },
+    {
+      "name": "Stasss",
+      "location": "Moscow",
+      "age": "28",
+      "id": 10
     }
   ]
 }

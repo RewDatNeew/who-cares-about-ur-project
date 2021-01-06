@@ -149,14 +149,12 @@ const UsersPage = (props) => {
                             currentValue={currentUser.name}
                             style="secondary"
                             label='name'
-                            type="search"
                             onChange={handleChangeName}
                         />
                         <Input
                             currentValue={currentUser.location}
                             style="secondary"
                             label='location'
-                            type="search"
                             onChange={handleChangeLocation}
                         />
                         <Input

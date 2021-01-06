@@ -14,7 +14,7 @@ export const Input = (props) => {
         type = '',
         style = '',
         onChange = () => console.log('onChange'),
-        currentValue = '',
+        currentValue = null,
     } = props;
 
     const theme = createMuiTheme({
