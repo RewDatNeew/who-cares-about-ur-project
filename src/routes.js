@@ -9,12 +9,12 @@ export const routes = [
         label: 'Home',
         path: '/start',
     },
-    {
-        component: FirstPage,
-        icon: <Icon name="sack" />,
-        label: 'First Page',
-        path: '/first-page',
-    },
+    // {
+    //     component: FirstPage,
+    //     icon: <Icon name="sack" />,
+    //     label: 'First Page',
+    //     path: '/first-page',
+    // },
     {
         component: UsersPage,
         icon: <Icon name="users" />,

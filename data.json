@@ -13,22 +13,11 @@
       "id": 2
     },
     {
-      "name": "Nastya",
+      "name": "Daria",
       "location": "Odintsovo",
       "age": "26",
       "id": 3
-    },
-    {
-      "name": "Snoop",
-      "location": "New-York",
-      "age": "12",
-      "id": 4
-    },
-    {
-      "name": "aaa",
-      "location": "2121",
-      "age": "222",
-      "id": 5
     }
-  ]
+  ],
+  "login": []
 }
