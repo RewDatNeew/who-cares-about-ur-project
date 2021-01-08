@@ -1,12 +1,6 @@
 {
   "users": [
     {
-      "name": "Andrew",
-      "location": "Russia",
-      "age": "11",
-      "id": 1
-    },
-    {
       "name": "Alice",
       "location": "Smith",
       "age": "33",
