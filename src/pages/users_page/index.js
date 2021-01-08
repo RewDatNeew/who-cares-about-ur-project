@@ -1,12 +1,12 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { actionTypes as types } from '../../constants';
 import { connect } from 'react-redux';
-import {IconButton, Table} from "../../components";
+import { IconButton, Pagination, Table } from "../../components";
 import { useUpdateStore } from "../../hooks";
 import { isEmpty } from "../../helpers";
-import {getUsers, addUser, deleteUser, editUser, searchUser} from "./duck/action";
+import { getUsers, addUser, deleteUser, editUser, searchUser, getLimitedUsers } from "./duck/action";
 import { ConfigControl } from "./components/config-control";
-import {ModalAdd, ModalEdit} from "./components/modals";
+import { ModalAdd, ModalEdit } from "./components/modals";
 import './style.less';
 
 const UsersPage = (props) => {
@@ -21,16 +21,33 @@ const UsersPage = (props) => {
         currentUser = {},
         search = '',
         searchResult = [],
+        page = 0,
+        totalElements = 0,
+        size = 0,
     } = props.users;
 
     const updateStore = useUpdateStore({ type: types.USERS_UPDATE })
+
+    const usersRef = useRef();
+    useEffect(() => {
+        usersRef.current = props.users;
+    })
 
     const handleGetUsers = () => {
         props.dispatch(getUsers());
     }
 
+    const handleSendPageParams = () => {
+        const {
+            page,
+            size,
+        } = usersRef.current;
+        props.dispatch(getLimitedUsers({ page, size }));
+    }
+
     useEffect(() => {
-        handleGetUsers()
+        handleGetUsers();
+        // handleSendPageParams()
     }, [])
 
     const handleCloseModal = () => {
@@ -145,12 +162,35 @@ const UsersPage = (props) => {
         }
     ]
 
+    const changePageNumber = async (page) => {
+        await updateStore({
+            page: page - 1,
+        })
+        handleSendPageParams()
+    }
+
+    const changeValuePerPage = async (value) => {
+        await updateStore({
+            page,
+            size: value,
+        })
+        handleSendPageParams();
+    }
+
     return (
         <div className="contentGrid users-page">
             <ConfigControl
                 handleSearch={handleSearch}
                 handleOpenAdding={handleOpenAdding}
                 handleSendSearch={handleSendSearch}
+            />
+            <Pagination
+                page={page}
+                size={size}
+                totalElements={totalElements}
+                updateStore={updateStore}
+                changePageNumber={changePageNumber}
+                changeValuePerPage={changeValuePerPage}
             />
             <span className="scrollBox">
                 {!isEmpty(users) ? <Table columns={columns} data={users} searchResult={searchResult} /> : null}

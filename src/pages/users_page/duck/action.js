@@ -7,10 +7,12 @@ export const getUsers = (params) => {
             params,
         })
             .then((response) => {
+                console.log({response})
                 dispatch({
                     type: types.USERS_UPDATE,
                     payload: {
                         users: response.data,
+                        totalElements: response.data.length,
                     },
                 });
             }).catch(error => {
@@ -84,4 +86,21 @@ export const searchUser = (search) => {
                 console.log(error);
             });
     }
+}
+
+export const getLimitedUsers = ({ page, size }) => {
+    return async function (dispatch) {
+        await axios.get(`${urls.USERS}?_limit=${size}&_page=${page}`, )
+            .then((response) => {
+                console.log({limit: response})
+                dispatch({
+                    type: types.USERS_UPDATE,
+                    payload: {
+                        users: response.data,
+                    },
+                });
+            }).catch(error => {
+                console.log(error);
+            });
+    };
 }

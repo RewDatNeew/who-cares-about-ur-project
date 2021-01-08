@@ -1,46 +1,46 @@
-import React from 'react';
-import Button from '@material-ui/core/Button';
-import {
-    ThemeProvider,
-    createMuiTheme,
-} from '@material-ui/core/styles';
+import React, { useEffect, useState } from 'react';
+import className from 'classnames';
 import './style.less';
 
-// styles: default, primary, secondary, disabled
-// type: text, outlined, contained
 
-export const ButtonComponent = (props) => {
-    const {
-        style = 'primary',
-        type = 'contained',
-        title = '',
-        disabled = false,
-        size = 'small',
-        icon = '',
-        onClick = () => console.log('onClick')
-    } = props;
+export const ButtonComponent = ({ title, onClick, style = 'primary', cn = '' }) => {
+    const [coords, setCoords] = useState({ x: -1, y: -1 });
+    const [isRippling, setIsRippling] = useState(false);
 
-    const theme = createMuiTheme({
-        palette: {
-            primary: {
-                main: '#f0f8ff'
-            }
-        },
-    });
+    useEffect(() => {
+        if (coords.x !== -1 && coords.y !== -1) {
+            setIsRippling(true);
+            setTimeout(() => setIsRippling(false), 1200);
+        } else setIsRippling(false);
+    }, [coords]);
+
+    useEffect(() => {
+        if (!isRippling) setCoords({ x: -1, y: -1 });
+    }, [isRippling]);
 
     return (
-        <ThemeProvider theme={theme}>
-            <Button
-                variant={type}
-                color={style}
-                size={size}
-                disabled={disabled}
-                startIcon={icon ? icon : ''}
-                onClick={onClick}
-                className="btn"
-            >
-                {title}
-            </Button>
-        </ThemeProvider>
-    )
+        <button
+            className={className("btn", style, cn)}
+            onClick={e => {
+                let rect = e.target.getBoundingClientRect();
+                let x = e.clientX - rect.left;
+                let y = e.clientY - rect.top;
+                setCoords({ x, y });
+                onClick && onClick(e);
+            }}
+        >
+            {isRippling ? (
+                <span
+                    className="ripple"
+                    style={{
+                        left: coords.x + 10,
+                        top: coords.y
+                    }}
+                />
+            ) : (
+                ""
+            )}
+            <span className="content">{title}</span>
+        </button>
+    );
 }

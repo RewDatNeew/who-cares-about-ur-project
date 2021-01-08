@@ -14,8 +14,8 @@ export const ConfigControl = (props) => {
             <div className="config">
                 <Input style="primary" label='search' onChange={handleSearch}/>
                 <div>
-                    <Button type='contained' title="Search" size="small" onClick={handleSendSearch} />
-                    <Button type='contained' title="Add User" size="small" onClick={handleOpenAdding} />
+                    <Button title="Search" onClick={handleSendSearch} />
+                    <Button title="Add User" onClick={handleOpenAdding} />
                 </div>
             </div>
         </Config>

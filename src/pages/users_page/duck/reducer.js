@@ -14,6 +14,10 @@ const initialState = {
     location: '',
     age: 0,
 
+    page: 0,
+    size: 10,
+    totalElements: 0,
+
     currentUser: {
         id: 0,
         name: '',

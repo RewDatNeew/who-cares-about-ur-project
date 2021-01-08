@@ -31,8 +31,8 @@ export const Modal = (props) => {
                     {children}
                 </div>
                 <div className="footer-modal">
-                    <Button type='contained' title={actionTitle} size="small" onClick={modalAction} />
-                    <Button type='contained' title="Close modal" size="small" onClick={closeModal} />
+                    <Button title={actionTitle} style="secondary" onClick={modalAction} />
+                    <Button title="Close modal" style="secondary" onClick={closeModal} />
                 </div>
             </div>
         </div>

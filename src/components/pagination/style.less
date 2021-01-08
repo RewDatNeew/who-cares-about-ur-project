@@ -1,0 +1,40 @@
+.containerPagination {
+  .controls {
+    flex-shrink: 0;
+    padding: 1rem;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+
+    .group {
+      display: flex;
+      align-items: center;
+
+      & > * {
+        display: flex;
+        align-items: center;
+
+        & + * {
+          margin-left: 1rem;
+        }
+
+        & > * + * {
+          display: block;
+          margin-left: .5rem;
+        }
+      }
+    }
+
+    .print-group {
+      .print-zoom {
+        display: none;
+      }
+
+      &:hover {
+        .print-zoom {
+          display: block;
+        }
+      }
+    }
+  }
+}

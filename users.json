@@ -1,46 +1,34 @@
 {
   "users": [
     {
-      "name": "Alice",
-      "location": "Smith",
-      "age": "33",
-      "id": 6
-    },
-    {
-      "name": "Roy",
-      "location": "Smith",
-      "age": "44",
-      "id": 7
+      "name": "Andrew",
+      "location": "Moscow",
+      "age": "27",
+      "id": 1
     },
     {
       "name": "Maria",
       "location": "Moscow",
-      "age": "27",
-      "id": 8
-    },
-    {
-      "name": "Dasha",
-      "location": "Moscow",
       "age": "26",
-      "id": 9
+      "id": 2
     },
     {
-      "name": "Horse",
-      "location": "Rio",
-      "age": "22",
-      "id": 11
+      "name": "Nastya",
+      "location": "Odintsovo",
+      "age": "26",
+      "id": 3
     },
     {
-      "name": "Egor",
-      "location": "Chicago",
-      "age": "22",
-      "id": 12
+      "name": "Snoop",
+      "location": "New-York",
+      "age": "12",
+      "id": 4
     },
     {
-      "name": "Dmitry",
-      "location": "London",
-      "age": "11",
-      "id": 13
+      "name": "aaa",
+      "location": "2121",
+      "age": "222",
+      "id": 5
     }
   ]
 }
