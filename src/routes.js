@@ -7,7 +7,7 @@ export const routes = [
         component: HomePage,
         icon: <Icon name="home" />,
         label: 'Home',
-        path: '/start',
+        path: '/home',
     },
     // {
     //     component: FirstPage,

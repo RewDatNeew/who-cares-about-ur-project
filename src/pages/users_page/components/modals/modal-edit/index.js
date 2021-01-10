@@ -23,19 +23,16 @@ export const ModalEdit = (props) => {
                 <div className="input-zone">
                     <Input
                         currentValue={currentUser.name}
-                        style="secondary"
                         label='name'
                         onChange={handleChangeName}
                     />
                     <Input
                         currentValue={currentUser.location}
-                        style="secondary"
                         label='location'
                         onChange={handleChangeLocation}
                     />
                     <Input
                         currentValue={currentUser.age}
-                        style="secondary"
                         label='age'
                         type='number'
                         onChange={handleChangeAge}

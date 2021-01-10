@@ -19,5 +19,26 @@
       "id": 3
     }
   ],
-  "login": []
+  "auth": [
+    {
+      "name": "admin",
+      "surname": "admin",
+      "login": "admin",
+      "password": "admin",
+      "id": 1
+    },
+    {
+      "name": "Andrew",
+      "surname": "Ivanov",
+      "password": "123",
+      "login": "rewdatnew",
+      "id": 2
+    },
+    {
+      "name": "Maria",
+      "password": "rad1",
+      "login": "radmaria",
+      "id": 3
+    }
+  ]
 }

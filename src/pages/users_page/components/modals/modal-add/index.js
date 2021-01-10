@@ -20,9 +20,9 @@ export const ModalAdd = (props) => {
                     closeModal={handleCloseModal}
                 >
                     <div className="input-zone">
-                        <Input style="secondary" label='name' onChange={handleChangeName}/>
-                        <Input style="secondary" label='location' onChange={handleChangeLocation}/>
-                        <Input style="secondary" label='age' type='number' onChange={handleChangeAge}/>
+                        <Input label='name' onChange={handleChangeName}/>
+                        <Input label='location' onChange={handleChangeLocation}/>
+                        <Input label='age' type='number' onChange={handleChangeAge}/>
                     </div>
                 </Modal>
             : null}

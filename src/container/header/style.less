@@ -1,8 +1,25 @@
 @import (reference) "../../styles/style.less";
 
 .header {
-  .title-header {
-    margin-left: .5rem;
-    font-size: 20px;
-  }
+    .project-title {
+      display: flex;
+      margin: 1rem 1rem 1rem 2rem;
+      .title-header {
+        margin-left: .5rem;
+        font-size: 20px;
+      }
+    }
+    .user-control {
+      display: flex;
+      .current-user {
+        display: flex;
+        margin: 1rem;
+        .icon {
+          margin-top: 3px;
+        }
+        .user {
+          margin-left: .5rem;
+        }
+      }
+    }
 }

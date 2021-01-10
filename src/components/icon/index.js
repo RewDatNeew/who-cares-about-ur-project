@@ -11,6 +11,11 @@ import { ReactComponent as EditIcon } from './../../svg/edit.svg';
 import { ReactComponent as CloseIcon } from './../../svg/close.svg';
 import { ReactComponent as SortAscIcon } from './../../svg/sort-asc.svg';
 import { ReactComponent as SortDescIcon } from './../../svg/sort-desc.svg';
+import { ReactComponent as UserIcon } from './../../svg/user.svg';
+import { ReactComponent as LogOutIcon } from './../../svg/logout.svg';
+import { ReactComponent as EyeIcon } from './../../svg/eye.svg';
+import { ReactComponent as EyeNonIcon } from './../../svg/eye-non.svg';
+
 
 export const Icon = ({ size = '1em', fill = 'currentColor', name, cn = '' }) => {
     const svgIconProps = { width: size, height: size, fill, viewBox: '0 0 24 24', className: cn };
@@ -25,6 +30,10 @@ export const Icon = ({ size = '1em', fill = 'currentColor', name, cn = '' }) => 
         close: CloseIcon,
         'sort-asc': SortAscIcon,
         'sort-desc': SortDescIcon,
+        user: UserIcon,
+        'log-out': LogOutIcon,
+        eye: EyeIcon,
+        'eye-non': EyeNonIcon,
     }[name];
 
     return (

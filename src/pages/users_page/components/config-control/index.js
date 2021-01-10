@@ -12,7 +12,7 @@ export const ConfigControl = (props) => {
     return (
         <Config headerTitle='Config' iconName="settings">
             <div className="config">
-                <Input style="primary" label='search' onChange={handleSearch}/>
+                <Input label='search' onChange={handleSearch}/>
                 <div>
                     <Button title="Search" onClick={handleSendSearch} />
                     <Button title="Add User" onClick={handleOpenAdding} />
