@@ -1,13 +1,13 @@
 import React from 'react';
-import {Input, Modal} from "../../../../components";
+import { Modal } from "../../../../components";
 
 export const ChangePasswordModal = (props) => {
     const {
         isOpenPasswordModal = false,
         handleCloseModal = () => console.log('handleCloseModal'),
         handleChangePassword = () => console.log('handleChangePassword'),
-        handleEnterNewPassword = () => console.log('handleEnterNewPassword'),
-        handleEnterCurrentPassword = () => console.log('handleEnterCurrentPassword'),
+        newPasswordInput = () => console.log('newPasswordInput'),
+        currentPasswordInput = () => console.log('currentPasswordInput'),
     } = props;
     return (
         <>
@@ -19,16 +19,8 @@ export const ChangePasswordModal = (props) => {
                     modalAction={handleChangePassword}
                     closeModal={handleCloseModal}>
                     <div className="modal-input-zone">
-                        <Input
-                            type="password"
-                            label='current password'
-                            onChange={handleEnterCurrentPassword}
-                        />
-                        <Input
-                            type="password"
-                            label='new password'
-                            onChange={handleEnterNewPassword}
-                        />
+                        {currentPasswordInput}
+                        {newPasswordInput}
                     </div>
                   </Modal>
                 : null

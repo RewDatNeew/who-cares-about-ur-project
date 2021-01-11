@@ -4,7 +4,7 @@ import './style.less';
 import { editUserPassword } from './duck/action';
 import { HeaderPage, Button } from "../../components";
 import { ChangePasswordModal } from "./modals";
-import { useUpdateStore } from "../../hooks";
+import {useInput, useUpdateStore} from "../../hooks";
 import { actionTypes as types } from "../../constants";
 import { useSnackbar } from "notistack";
 
@@ -38,17 +38,19 @@ const ProfilePage = (props) => {
         })
     }
 
-    const handleEnterCurrentPassword = (e) => {
-        updateStore({
-            currentPassword: e.target.value,
-        })
-    }
+    const currentPasswordInput = useInput({
+        type: 'password',
+        updateStore,
+        name: 'currentPassword',
+        label: 'Current Password'
+    })
 
-    const handleEnterNewPassword = (e) => {
-        updateStore({
-            newPassword: e.target.value,
-        })
-    }
+    const newPasswordInput = useInput({
+        type: 'password',
+        updateStore,
+        name: 'newPassword',
+        label: 'New Password'
+    })
 
     const reloadPage = () => {
         window.location.reload(false)
@@ -87,8 +89,8 @@ const ProfilePage = (props) => {
         <div className="contentGrid profile-page">
             <HeaderPage title={props.item.label} icon={props.item.icon} />
             <ChangePasswordModal
-                handleEnterCurrentPassword={handleEnterCurrentPassword}
-                handleEnterNewPassword={handleEnterNewPassword}
+                currentPasswordInput={currentPasswordInput}
+                newPasswordInput={newPasswordInput}
                 handleChangePassword={handleChangePassword}
                 isOpenPasswordModal={isOpenPasswordModal}
                 handleCloseModal={handleCloseModal}

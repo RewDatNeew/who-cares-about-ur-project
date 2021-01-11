@@ -1,15 +1,14 @@
 import React from 'react';
-import { Input, Modal } from "../../../../../components";
+import { Modal } from "../../../../../components";
 
 export const ModalEdit = (props) => {
     const {
         isOpenModalEdit = false,
-        currentUser = {},
         handleEditUser = () => console.log('handleEditUser'),
         handleCloseModal = () => console.log('handleCloseModal'),
-        handleChangeName = () => console.log('handleChangeName'),
-        handleChangeLocation = () => console.log('handleChangeLocation'),
-        handleChangeAge = () => console.log('handleChangeAge'),
+        editNameInput = () => console.log('editNameInput'),
+        editLocationInput = () => console.log('editLocationInput'),
+        editAgeInput = () => console.log('editAgeInput'),
     } = props;
     return (
         <>
@@ -21,22 +20,9 @@ export const ModalEdit = (props) => {
                 closeModal={handleCloseModal}
             >
                 <div className="input-zone">
-                    <Input
-                        currentValue={currentUser.name}
-                        label='name'
-                        onChange={handleChangeName}
-                    />
-                    <Input
-                        currentValue={currentUser.location}
-                        label='location'
-                        onChange={handleChangeLocation}
-                    />
-                    <Input
-                        currentValue={currentUser.age}
-                        label='age'
-                        type='number'
-                        onChange={handleChangeAge}
-                    />
+                    {editNameInput}
+                    {editLocationInput}
+                    {editAgeInput}
                 </div>
             </Modal>
             : null}

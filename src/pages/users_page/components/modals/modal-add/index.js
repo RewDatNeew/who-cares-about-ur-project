@@ -1,12 +1,12 @@
 import React from 'react';
-import { Input, Modal } from "../../../../../components";
+import { Modal } from "../../../../../components";
 
 export const ModalAdd = (props) => {
     const {
         isOpenModalAdd = false,
-        handleChangeName = () => console.log('handleChangeName'),
-        handleChangeLocation = () => console.log('handleChangeLocation'),
-        handleChangeAge = () => console.log('handleChangeAge'),
+        nameInput = () => console.log('nameInput'),
+        locationInput = () => console.log('locationInput'),
+        ageInput = () => console.log('ageInput'),
         handleAddUser = () => console.log('handleAddUser'),
         handleCloseModal = () => console.log('handleCloseModal'),
     } = props;
@@ -20,9 +20,9 @@ export const ModalAdd = (props) => {
                     closeModal={handleCloseModal}
                 >
                     <div className="input-zone">
-                        <Input label='name' onChange={handleChangeName}/>
-                        <Input label='location' onChange={handleChangeLocation}/>
-                        <Input label='age' type='number' onChange={handleChangeAge}/>
+                        {nameInput}
+                        {locationInput}
+                        {ageInput}
                     </div>
                 </Modal>
             : null}

@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from 'react';
 import { actionTypes as types } from '../../constants';
 import { connect } from 'react-redux';
 import { HeaderPage, IconButton, Pagination, Table } from "../../components";
-import { useUpdateStore } from "../../hooks";
+import {useInput, useUpdateStore} from "../../hooks";
 import { isEmpty } from "../../helpers";
 import { getUsers, addUser, deleteUser, editUser, searchUser, getLimitedUsers } from "./duck/action";
 import { ConfigControl } from "./components/config-control";
@@ -56,27 +56,28 @@ const UsersPage = (props) => {
         })
     }
 
-    const handleChangeName = (e) => {
-        updateStore({
-            name: e.target.value,
-        })
-    }
-    const handleChangeLocation = (e) => {
-        updateStore({
-            location: e.target.value,
-        })
-    }
-    const handleChangeAge = (e) => {
-        updateStore({
-            age: e.target.value,
-        })
-    }
+    const nameInput = useInput({
+        updateStore,
+        name: 'name',
+        label: 'Name'
+    })
+    const locationInput = useInput({
+        updateStore,
+        name: 'location',
+        label: 'location'
+    })
+    const ageInput = useInput({
+        type: 'number',
+        updateStore,
+        name: 'age',
+        label: 'age'
+    })
 
-    const handleSearch = (e) => {
-        updateStore({
-            search: e.target.value,
-        })
-    }
+    const searchInput = useInput({
+        updateStore,
+        name: 'search',
+        label: 'search',
+    })
 
     const handleSendSearch = async () => {
         await props.dispatch(searchUser(search));
@@ -129,6 +130,26 @@ const UsersPage = (props) => {
         updateStore(payload);
     }
 
+    const editNameInput = useInput({
+        currentValue: currentUser.name,
+        updateStore,
+        name: 'name',
+        label: 'Name'
+    })
+    const editLocationInput = useInput({
+        currentValue: currentUser.location,
+        updateStore,
+        name: 'location',
+        label: 'location'
+    })
+    const editAgeInput = useInput({
+        currentValue: currentUser.age,
+        type: 'number',
+        updateStore,
+        name: 'age',
+        label: 'age'
+    })
+
     const handleOpenAdding = () => {
         const payload = {
             isOpenModalAdd: !isOpenModalAdd,
@@ -180,7 +201,7 @@ const UsersPage = (props) => {
         <div className="contentGrid users-page">
             <HeaderPage title={props.item.label} icon={props.item.icon} />
             <ConfigControl
-                handleSearch={handleSearch}
+                searchInput={searchInput}
                 handleOpenAdding={handleOpenAdding}
                 handleSendSearch={handleSendSearch}
             />
@@ -197,9 +218,9 @@ const UsersPage = (props) => {
             </span>
             <ModalAdd
                 isOpenModalAdd={isOpenModalAdd}
-                handleChangeName={handleChangeName}
-                handleChangeLocation={handleChangeLocation}
-                handleChangeAge={handleChangeAge}
+                nameInput={nameInput}
+                locationInput={locationInput}
+                ageInput={ageInput}
                 handleAddUser={handleAddUser}
                 handleCloseModal={handleCloseModal}
             />
@@ -208,9 +229,9 @@ const UsersPage = (props) => {
                 currentUser={currentUser}
                 handleCloseModal={handleCloseModal}
                 handleEditUser={handleEditUser}
-                handleChangeName={handleChangeName}
-                handleChangeLocation={handleChangeLocation}
-                handleChangeAge={handleChangeAge}
+                editNameInput={editNameInput}
+                editLocationInput={editLocationInput}
+                editAgeInput={editAgeInput}
             />
         </div>
     )

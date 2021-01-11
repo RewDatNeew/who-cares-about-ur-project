@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react';
 import { useSnackbar } from 'notistack'
 import './style.less';
-import {Button, Icon, Input} from "../../components";
+import { Button, Icon } from "../../components";
 import { connect } from "react-redux";
-import { useUpdateStore } from "../../hooks";
+import { useInput, useUpdateStore } from "../../hooks";
 import { actionTypes as types } from "../../constants";
 import { addAuthUser, getAuthUsers } from "./duck/action";
 import { SignInModal } from "./modals";
@@ -38,17 +38,19 @@ const Auth = (props) => {
 
     // LOG IN /////////////////////////////////////////////////////////////////////
 
-    const handleEnterLoginName = (e) => {
-        updateStore({
-            login: e.target.value,
-        })
-    }
+    const loginLogInInput = useInput({
+        updateStore,
+        name: 'login',
+        label: 'login'
+    })
+    const passwordLogInInput = useInput({
+        type: 'password',
+        updateStore,
+        name: 'password',
+        label: 'password'
+    })
 
-    const handleEnterLoginPassword = (e) => {
-        updateStore({
-            password: e.target.value,
-        })
-    }
+
 
     const handleLogIn = () => {
         if (loginsArr.includes(login)) {
@@ -76,21 +78,24 @@ const Auth = (props) => {
 
     // SIGN IN (ALL THIS PROPS TO MODAL SIGN IN COMPONENT) ////////////////////////
 
-    const handleChangeName = (e) => {
-        updateStore({
-            name: e.target.value,
-        })
-    }
-    const handleChangeLogin = (e) => {
-        updateStore({
-            login: e.target.value,
-        })
-    }
-    const handleChangePassword = (e) => {
-        updateStore({
-            password: e.target.value,
-        })
-    }
+    const nameSignInInput = useInput({
+        updateStore,
+        name: 'name',
+        label: 'name'
+    })
+
+    const loginSignInInput = useInput({
+        updateStore,
+        name: 'login',
+        label: 'login'
+    })
+
+    const passwordSignInInput = useInput({
+        type: 'password',
+        updateStore,
+        name: 'password',
+        label: 'password'
+    })
 
     const handleCloseModal = () => {
         updateStore({
@@ -121,21 +126,13 @@ const Auth = (props) => {
                 isOpenSignInModal={isOpenSignInModal}
                 handleSignIn={handleSignIn}
                 handleCloseModal={handleCloseModal}
-                handleChangeName={handleChangeName}
-                handleChangeLogin={handleChangeLogin}
-                handleChangePassword={handleChangePassword}
+                nameSignInInput={nameSignInInput}
+                loginSignInInput={loginSignInInput}
+                passwordSignInInput={passwordSignInInput}
             />
             <div className="input-zone">
-                <Input
-                    label='login'
-                    onChange={handleEnterLoginName}
-                />
-                <Input
-                    type="password"
-                    label='password'
-                    isPassword
-                    onChange={handleEnterLoginPassword}
-                />
+                {loginLogInInput}
+                {passwordLogInInput}
             </div>
             <div className="button-zone">
                 <Button title="Sign In" onClick={handleOpenSignIn} />

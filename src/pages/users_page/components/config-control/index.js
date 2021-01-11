@@ -1,18 +1,18 @@
 import React from 'react';
-import { Button, Config, Input } from "../../../../components";
+import { Button, Config } from "../../../../components";
 import './style.less';
 
 export const ConfigControl = (props) => {
     const {
         handleOpenAdding = () => console.log('handleOpenAdding'),
         handleSendSearch = () => console.log('handleSendSearch'),
-        handleSearch = () => console.log('handleSearch'),
+        searchInput = () => console.log('searchInput'),
     } = props;
 
     return (
         <Config headerTitle='Config' iconName="settings">
             <div className="config">
-                <Input label='search' onChange={handleSearch}/>
+                {searchInput}
                 <div>
                     <Button title="Search" onClick={handleSendSearch} />
                     <Button title="Add User" onClick={handleOpenAdding} />
