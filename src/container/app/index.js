@@ -22,21 +22,26 @@ const AppContainer = (props) => {
 
   useEffect(() => {
       const isLogin = localStorage.getItem('isLogin') === 'true';
-      const login = localStorage.getItem('login');
-      const name = localStorage.getItem('name');
-      const password = localStorage.getItem('password');
-      const id = localStorage.getItem('id');
-      const encodedPass = atob(password);
-      const encodedId = Number(atob(id));
 
-      updateStore({
-          currentUser: {
-              login,
-              name,
-              password: encodedPass,
-              id: encodedId,
-          }
-      })
+      if (isLogin) {
+          const user = localStorage.getItem('user')
+          const parsedUser = JSON.parse(user)
+          const {
+              login = '', name = '', password = '', id = '',
+          } = parsedUser
+
+          const encodedPass = atob(password);
+          const encodedId = Number(atob(id));
+
+          updateStore({
+              currentUser: {
+                  login,
+                  name,
+                  password: encodedPass,
+                  id: encodedId,
+              }
+          })
+      }
 
       setIsLogin(isLogin);
   }, [isLogin])

@@ -29,20 +29,42 @@
       "location": "2",
       "age": "2",
       "id": 5
+    },
+    {
+      "name": "2",
+      "location": "3",
+      "age": "11",
+      "id": 6
+    },
+    {
+      "name": "22",
+      "location": "22",
+      "age": "222",
+      "id": 7
+    },
+    {
+      "name": "231",
+      "location": "12312",
+      "age": "231",
+      "id": 8
+    },
+    {
+      "name": "12312",
+      "location": "12312",
+      "age": "2131",
+      "id": 9
     }
   ],
   "auth": [
     {
       "name": "admin",
-      "surname": "admin",
       "login": "admin",
       "password": "admin",
       "id": 1
     },
     {
-      "name": "Andrew",
-      "surname": "Ivanov",
       "password": "123",
+      "name": "Andrew",
       "login": "rewdatnew",
       "id": 2
     },

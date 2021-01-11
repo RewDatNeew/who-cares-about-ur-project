@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import className from 'classnames';
 import './style.less';
 
-
 export const ButtonComponent = ({ title, onClick, style = 'primary', cn = '' }) => {
     const [coords, setCoords] = useState({ x: -1, y: -1 });
     const [isRippling, setIsRippling] = useState(false);

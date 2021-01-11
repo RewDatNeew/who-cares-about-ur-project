@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import { actionTypes as types } from '../../constants';
 import { connect } from 'react-redux';
-import { IconButton, Pagination, Table } from "../../components";
+import { HeaderPage, IconButton, Pagination, Table } from "../../components";
 import { useUpdateStore } from "../../hooks";
 import { isEmpty } from "../../helpers";
 import { getUsers, addUser, deleteUser, editUser, searchUser, getLimitedUsers } from "./duck/action";
@@ -178,6 +178,7 @@ const UsersPage = (props) => {
 
     return (
         <div className="contentGrid users-page">
+            <HeaderPage title={props.item.label} icon={props.item.icon} />
             <ConfigControl
                 handleSearch={handleSearch}
                 handleOpenAdding={handleOpenAdding}

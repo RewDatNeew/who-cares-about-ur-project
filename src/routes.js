@@ -11,7 +11,7 @@ export const routes = [
     },
     {
         component: ProfilePage,
-        icon: <Icon name="sack" />,
+        icon: <Icon name="user" />,
         label: 'Profile Page',
         path: '/profile-page',
     },

@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useSnackbar } from 'notistack'
 import './style.less';
-import { Button, Input } from "../../components";
+import {Button, Icon, Input} from "../../components";
 import { connect } from "react-redux";
 import { useUpdateStore } from "../../hooks";
 import { actionTypes as types } from "../../constants";
@@ -54,13 +54,16 @@ const Auth = (props) => {
         if (loginsArr.includes(login)) {
             const idxLogin = authUsers.findIndex(x => x.login === login);
             const certainObj = authUsers[idxLogin];
+            const user = {
+                login,
+                name: certainObj.name,
+                password: btoa(certainObj.password),
+                id: btoa(certainObj.id)
+            }
 
             if (certainObj.password === password) {
                 localStorage.setItem('isLogin', 'true');
-                localStorage.setItem('login', login);
-                localStorage.setItem('name', certainObj.name)
-                localStorage.setItem('password', btoa(certainObj.password))
-                localStorage.setItem('id', btoa(certainObj.id))
+                localStorage.setItem('user', JSON.stringify(user))
                 window.location.reload(false);
             } else {
                 return enqueueSnackbar(`Неверный пароль`)
@@ -113,7 +116,7 @@ const Auth = (props) => {
 
     return (
         <div className="auth">
-            Login Page
+            <Icon name="user" size={40}/>
             <SignInModal
                 isOpenSignInModal={isOpenSignInModal}
                 handleSignIn={handleSignIn}

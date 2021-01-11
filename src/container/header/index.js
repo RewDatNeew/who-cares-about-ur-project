@@ -7,6 +7,7 @@ export const Header = (props) => {
         user = {},
         logOut = () => console.log('logOut'),
     } = props;
+
     return (
         <div className="header">
                 <div className="project-title">
@@ -15,7 +16,7 @@ export const Header = (props) => {
                         Who Cares About Ur Project?
                     </div>
                 </div>
-                { user.name !== null
+                { user.login !== ''
                     ? <div className="user-control">
                         <div className="current-user">
                             <Icon name="user"/>

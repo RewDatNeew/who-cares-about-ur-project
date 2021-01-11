@@ -3,12 +3,34 @@
     font-size: x-large;
     font-weight: 600
   }
+
   .current-user {
     display: flex;
     flex-direction: column;
     margin-top: 1rem;
-    & * > {
-      margin: .5rem .5rem .5rem 0;
+    box-shadow: 0 0 5px;
+    border-radius: 16px;
+    padding: .8rem;
+    .info {
+      display: flex;
+      flex-direction: column;
+      & * > {
+        margin: .5rem;
+      }
+    }
+    .info-control {
+        margin-top: .5rem;
+    }
+  }
+
+  .content-modal {
+    justify-content: center;
+    .modal-input-zone {
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 0 5px;
+      border-radius: 16px;
+      padding: 1rem;
     }
   }
 }
