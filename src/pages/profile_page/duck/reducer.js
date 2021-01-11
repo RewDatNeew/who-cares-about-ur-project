@@ -1,17 +1,12 @@
 import { actionTypes as types } from '../../../constants';
 
 const initialState = {
-    currentUser: {
-        login: '',
-        name: '',
-        password: '',
-        id: 0,
-    },
+
 };
 
-export const app = (state = initialState, action) => {
+export const profile = (state = initialState, action) => {
     switch (action.type) {
-        case types.APP_UPDATE: {
+        case types.PROFILE_UPDATE: {
             return {
                 ...state,
                 ...action.payload,

@@ -1,5 +1,5 @@
-import { FirstPage, HomePage } from "./pages";
-import {Icon} from "./components";
+import { ProfilePage, HomePage } from "./pages";
+import { Icon } from "./components";
 import UsersPage from "./pages/users_page";
 
 export const routes = [
@@ -9,12 +9,12 @@ export const routes = [
         label: 'Home',
         path: '/home',
     },
-    // {
-    //     component: FirstPage,
-    //     icon: <Icon name="sack" />,
-    //     label: 'First Page',
-    //     path: '/first-page',
-    // },
+    {
+        component: ProfilePage,
+        icon: <Icon name="sack" />,
+        label: 'Profile Page',
+        path: '/profile-page',
+    },
     {
         component: UsersPage,
         icon: <Icon name="users" />,

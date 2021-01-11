@@ -7,7 +7,6 @@ export const getUsers = (params) => {
             params,
         })
             .then((response) => {
-                console.log({response})
                 dispatch({
                     type: types.USERS_UPDATE,
                     payload: {
@@ -92,7 +91,6 @@ export const getLimitedUsers = ({ page, size }) => {
     return async function (dispatch) {
         await axios.get(`${urls.USERS}?_limit=${size}&_page=${page}`, )
             .then((response) => {
-                console.log({limit: response})
                 dispatch({
                     type: types.USERS_UPDATE,
                     payload: {

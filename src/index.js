@@ -10,13 +10,13 @@ import './styles/style.less';
 const history = createBrowserHistory();
 
 ReactDOM.render(
-    <Provider store={store}>
-        <Router history={history}>
-            <BrowserRouter basename={`wcaup/`}>
-                <Route path="/" component={AppContainer} />
-            </BrowserRouter>
-        </Router>
-    </Provider>,
+        <Provider store={store}>
+            <Router history={history}>
+                <BrowserRouter basename={`wcaup/`}>
+                    <Route path="/" component={AppContainer} />
+                </BrowserRouter>
+            </Router>
+        </Provider>,
   document.getElementById('root')
 );
 

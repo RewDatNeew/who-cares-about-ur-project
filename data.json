@@ -17,6 +17,18 @@
       "location": "Odintsovo",
       "age": "26",
       "id": 3
+    },
+    {
+      "name": "1",
+      "location": "1",
+      "age": "1",
+      "id": 4
+    },
+    {
+      "name": "2",
+      "location": "2",
+      "age": "2",
+      "id": 5
     }
   ],
   "auth": [
@@ -39,6 +51,18 @@
       "password": "rad1",
       "login": "radmaria",
       "id": 3
+    },
+    {
+      "name": "dasha",
+      "password": "123",
+      "login": "dasha",
+      "id": 4
+    },
+    {
+      "name": "pasha",
+      "password": "123",
+      "login": "pasha",
+      "id": 5
     }
   ]
 }

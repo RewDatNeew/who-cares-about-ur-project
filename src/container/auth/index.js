@@ -1,4 +1,5 @@
-import React, {useEffect} from 'react';
+import React, { useEffect } from 'react';
+import { useSnackbar } from 'notistack'
 import './style.less';
 import { Button, Input } from "../../components";
 import { connect } from "react-redux";
@@ -15,6 +16,8 @@ const Auth = (props) => {
         authUsers = [],
         isOpenSignInModal = false,
     } = props.auth;
+
+    const { enqueueSnackbar } = useSnackbar()
 
     useEffect(() => {
         props.dispatch(getAuthUsers())
@@ -51,16 +54,19 @@ const Auth = (props) => {
         if (loginsArr.includes(login)) {
             const idxLogin = authUsers.findIndex(x => x.login === login);
             const certainObj = authUsers[idxLogin];
+
             if (certainObj.password === password) {
                 localStorage.setItem('isLogin', 'true');
                 localStorage.setItem('login', login);
                 localStorage.setItem('name', certainObj.name)
+                localStorage.setItem('password', btoa(certainObj.password))
+                localStorage.setItem('id', btoa(certainObj.id))
                 window.location.reload(false);
             } else {
-                return console.log('password doesnt match to current login')
+                return enqueueSnackbar(`Неверный пароль`)
             }
         } else {
-            return console.log('user not found')
+            return enqueueSnackbar(`Пользователь ${login} не найден`)
         }
     }
 
@@ -97,10 +103,11 @@ const Auth = (props) => {
                 password,
             }
             await props.dispatch(addAuthUser(authUser));
+            enqueueSnackbar(`Пользователь ${login} успешно создан`)
             window.location.reload(false);
             handleCloseModal();
         } else {
-            return console.log('user with this login already exist')
+            return enqueueSnackbar(`Пользователь с логином ${login} уже существует`)
         }
     }
 

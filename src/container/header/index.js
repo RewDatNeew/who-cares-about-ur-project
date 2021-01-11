@@ -7,7 +7,6 @@ export const Header = (props) => {
         user = {},
         logOut = () => console.log('logOut'),
     } = props;
-    console.log({user})
     return (
         <div className="header">
                 <div className="project-title">

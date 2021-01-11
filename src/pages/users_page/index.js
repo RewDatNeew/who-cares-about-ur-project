@@ -47,7 +47,6 @@ const UsersPage = (props) => {
 
     useEffect(() => {
         handleGetUsers();
-        // handleSendPageParams()
     }, [])
 
     const handleCloseModal = () => {
