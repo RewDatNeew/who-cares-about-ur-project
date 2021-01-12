@@ -15,11 +15,12 @@ export const ModalAdd = (props) => {
             {isOpenModalAdd
                 ? <Modal
                     title="Add User"
+                    width="400px"
                     actionTitle="Add user"
                     modalAction={handleAddUser}
                     closeModal={handleCloseModal}
                 >
-                    <div className="input-zone">
+                    <div className="modal-input-zone">
                         {nameInput}
                         {locationInput}
                         {ageInput}

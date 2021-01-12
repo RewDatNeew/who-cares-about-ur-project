@@ -16,6 +16,7 @@ export const SignInModal = (props) => {
             {isOpenSignInModal
                 ? <Modal
                     title="Sign In"
+                    width="400px"
                     actionTitle="Sign In"
                     modalAction={handleSignIn}
                     closeModal={handleCloseModal}

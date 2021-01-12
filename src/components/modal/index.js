@@ -8,7 +8,8 @@ export const Modal = (props) => {
         actionTitle = '',
         children = null,
         closeModal = () => console.log('closeModal'),
-        modalAction = () => console.log('modalAction')
+        modalAction = () => console.log('modalAction'),
+        width = '800px'
     } = props;
 
     useEffect(() => {
@@ -22,7 +23,7 @@ export const Modal = (props) => {
 
     return (
         <div className="modal-overlay">
-            <div className="modal">
+            <div className="modal" style={{ width: width }}>
                 <div className="header-modal">
                     {title}
                     <IconButton name="close" onClick={closeModal} fill="#f44336" />
