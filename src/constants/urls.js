@@ -1,4 +1,4 @@
-export const PROJECT = 'http://localhost:3000'
+export const PROJECT = 'https://my-json-server.typicode.com/RewDatNeew/data-json'
 
 export const USERS = `${PROJECT}/users`;
 
