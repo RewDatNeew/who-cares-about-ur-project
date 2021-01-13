@@ -2,4 +2,4 @@
 
 npm run start
 
-json-server data.json
+json-server db.json
