@@ -1,0 +1,18 @@
+{
+  "users": [
+    {
+      "name": "String",
+      "location": "String",
+      "age": "int",
+      "id": "int"
+    }
+  ],
+  "auth": [
+    {
+      "name": "String",
+      "login": "String",
+      "password": "String",
+      "id": "int"
+    }
+  ]
+}
