@@ -12,7 +12,7 @@ const history = createBrowserHistory();
 ReactDOM.render(
         <Provider store={store}>
             <Router history={history}>
-                <BrowserRouter basename={`who-cares-about-ur-project/`}>
+                <BrowserRouter basename={`wcaup/`}>
                     <Route path="/" component={AppContainer} />
                 </BrowserRouter>
             </Router>
