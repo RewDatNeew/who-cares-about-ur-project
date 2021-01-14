@@ -24,6 +24,7 @@ const UsersPage = (props) => {
         page = 0,
         totalElements = 0,
         size = 0,
+        cells = [],
     } = props.users;
 
     const updateStore = useUpdateStore({ type: types.USERS_UPDATE })
@@ -157,31 +158,6 @@ const UsersPage = (props) => {
         updateStore(payload);
     }
 
-    const columns = [
-        {
-            Header: 'Name',
-            accessor: 'name',
-        },
-        {
-            Header: 'Location',
-            accessor: 'location',
-        },
-        {
-            Header: 'Age',
-            accessor: 'age',
-        },
-        {
-            id: 'id-edit',
-            Header: '',
-            accessor: (row) => <IconButton name="edit" fill="#f0f8ff" onClick={() => handleOpenEdition(row)} />,
-        },
-        {
-            id: 'id-delete',
-            Header: '',
-            accessor: (row) => <IconButton name="delete" fill="#f0f8ff" onClick={() => handleDeleteRow(row)} />,
-        }
-    ]
-
     const changePageNumber = async (page) => {
         await updateStore({
             page: page - 1,
@@ -196,6 +172,23 @@ const UsersPage = (props) => {
         })
         handleSendPageParams();
     }
+
+    const customTd = (row) => {
+        if (row !== null) {
+            return (
+                <>
+                    <td>
+                        <IconButton name="edit" fill="#f0f8ff" onClick={() => handleOpenEdition(row)} />
+                    </td>
+                    <td>
+                        <IconButton name="delete" fill="#f0f8ff" onClick={() => handleDeleteRow(row)} />
+                    </td>
+                </>
+            );
+        }
+    };
+
+    const addThs = [<th />, <th />]
 
     return (
         <div className="contentGrid users-page">
@@ -214,7 +207,13 @@ const UsersPage = (props) => {
                 changeValuePerPage={changeValuePerPage}
             />
             <span className="scrollBox">
-                {!isEmpty(users) ? <Table columns={columns} data={users} searchResult={searchResult} /> : null}
+                {!isEmpty(users) ? <Table
+                    cells={cells}
+                    data={users}
+                    searchResult={searchResult}
+                    addThs={addThs}
+                    customTd={customTd}
+                /> : null}
             </span>
             <ModalAdd
                 isOpenModalAdd={isOpenModalAdd}

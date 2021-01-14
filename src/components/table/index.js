@@ -1,57 +1,48 @@
 import React from 'react';
-import { useTable, useSortBy } from 'react-table'
 import { isEmpty } from "../../helpers";
-import { Icon } from "../icon";
 import './style.less';
 
 export const Table = (props) => {
-    const { columns, data, searchResult } = props;
+    const { data, searchResult, cells, addThs = [], customTd = {} } = props;
     const result = !isEmpty(searchResult) ? searchResult : data;
-    const {
-        getTableProps,
-        getTableBodyProps,
-        headerGroups,
-        rows,
-        prepareRow,
-    } = useTable({
-        columns,
-        data: result,
-    },
-        useSortBy,
-        )
+
+    const cellMap = (cell) => {
+            return <th><span>{cell?.label}</span></th>
+    }
+
+    const onTableRow = (row, cells) => {
+        return cells
+            .map((cell, iCell) => {
+                if (row !== null) {
+                    return <td key={iCell}>
+                        {row[cell?.name] || []}
+                    </td>;
+                }
+            });
+    };
 
     return (
-        <table className="table" {...getTableProps()}>
-            <thead>
-            {headerGroups.map(headerGroup => (
-                <tr {...headerGroup.getHeaderGroupProps()}>
-                    {headerGroup.headers.map(column => (
-                        <th {...column.getHeaderProps(column.getSortByToggleProps())}>
-                            <span className="th-sort">
-                                {column.render('Header')}
-                                {column.isSorted
-                                ? column.isSortedDesc
-                                    ? <Icon name="sort-asc" />
-                                    : <Icon name="sort-desc" />
-                                : ''}
-                            </span>
-                        </th>
-                    ))}
-                </tr>
-            ))}
-            </thead>
-            <tbody {...getTableBodyProps()}>
-            {rows.map((row, i) => {
-                prepareRow(row)
-                return (
-                    <tr {...row.getRowProps()}>
-                        {row.cells.map(cell => {
-                            return <td {...cell.getCellProps()}>{cell.render('Cell')}</td>
+        <div className="table">
+            <table>
+                <thead>
+                    <tr>
+                        {cells.map((th, i) => (
+                            cellMap(th, i)
+                        ))}
+                        {addThs.map((item) => {
+                            return item
                         })}
                     </tr>
-                )
-            })}
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                    {result.map((row, i) => (
+                        <tr key={i}>
+                            {onTableRow(row, cells)}
+                            {customTd(row)}
+                        </tr>
+                    ))}
+                </tbody>
+            </table>
+        </div>
     )
 }

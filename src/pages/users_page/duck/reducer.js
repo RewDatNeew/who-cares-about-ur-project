@@ -23,7 +23,13 @@ const initialState = {
         name: '',
         location: '',
         age: '',
-    }
+    },
+
+    cells: [
+        { label: 'Имя', name: 'name'  },
+        { label: 'Город', name: 'location' },
+        { label: 'Возраст', name: 'age' },
+    ],
 };
 
 export const users = (state = initialState, action) => {

@@ -1,22 +1,14 @@
 # who-cares-about-ur-project
 
 
-dev profile usage:
-
-//
+# dev profile usage:
 
 npm run start
 
-json-server db.json 
+json-server db.json
 
-//
+# deploying usage: 
 
+Пуш проекта автоматически синхронизируется с хостингом хероку
 
-deploying usage: 
-
-// 
-
-Через гитбаш деплоим проект используя "npm run deploy"
-
-при необходимости, меняем db.json в отдельной репе
-и пушим
+В файле urls апи на бд firebase

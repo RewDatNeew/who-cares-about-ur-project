@@ -1,16 +1,19 @@
-import { actionTypes as types, urls } from '../../../constants';
+import { actionTypes as types, urls, special } from '../../../constants';
 import axios from 'axios';
 
 export const getUsers = (params) => {
     return async function (dispatch) {
-        await axios.get(`${urls.USERS}`, {
+        await axios.get(`${urls.USERS}${special.json}`, {
             params,
         })
             .then((response) => {
                 dispatch({
                     type: types.USERS_UPDATE,
                     payload: {
-                        users: response.data,
+                        users: Object.entries(response.data).map((item) => {
+                            item[1]['id'] = item[0]
+                            return item[1]
+                        }),
                         totalElements: response.data.length,
                     },
                 });
@@ -28,7 +31,7 @@ export const addUser = (user) => {
     } = user;
 
     return async function () {
-        await axios.post(`${urls.USERS}`, {
+        await axios.post(`${urls.USERS}${special.json}`, {
             name: name,
             location: location,
             age: age,
@@ -42,7 +45,7 @@ export const addUser = (user) => {
 
 export const deleteUser = (id) => {
     return async function () {
-       await axios.delete(`${urls.USERS}/${id}`)
+       await axios.delete(`${urls.USERS}/${id}${special.json}`)
             .then(resp => {
                 console.log(resp.data)
             }).catch(error => {
@@ -59,7 +62,7 @@ export const editUser = (user) => {
         age
     } = user
     return async function () {
-        await axios.put(`${urls.USERS}/${id}`, {
+        await axios.put(`${urls.USERS}/${id}${special.json}`, {
             name: name,
             location: location,
             age: age
@@ -73,7 +76,7 @@ export const editUser = (user) => {
 
 export const searchUser = (search) => {
     return async function (dispatch) {
-        await axios.get(`${urls.USERS}?q=${search}`)
+        await axios.get(`${urls.USERS}?q=${search}${special.json}`)
             .then(resp => {
                 dispatch({
                     type: types.USERS_UPDATE,
@@ -89,7 +92,7 @@ export const searchUser = (search) => {
 
 export const getLimitedUsers = ({ page, size }) => {
     return async function (dispatch) {
-        await axios.get(`${urls.USERS}?_limit=${size}&_page=${page}`, )
+        await axios.get(`${urls.USERS}?_limit=${size}&_page=${page}${special.json}`, )
             .then((response) => {
                 dispatch({
                     type: types.USERS_UPDATE,

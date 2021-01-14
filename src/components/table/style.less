@@ -1,36 +1,49 @@
 .table {
-  margin: 1rem;
-  width: 100%;
-
+  table {
+    display: table;
+    text-align: left;
+    table-layout: fixed;
     border-spacing: 0;
-    border-top: 1px solid lightgray;
-    border-left: 1px solid lightgray;
+    width: 100%;
+    overflow: hidden;
+    overflow-x: auto;
+    background-color: transparent;
 
-    tr {
-      :last-child {
-        td {
-          border-bottom: 0;
-        }
-      }
+    .text-center {
+      text-align: center;
     }
 
-    th,
+    caption {
+      text-align: center;
+      font-weight: bold;
+      padding: 0.6rem 1rem;
+    }
+
+    thead {
+      vertical-align: bottom;
+    }
+
+    tbody tr td {
+      max-height: 100px;
+      border-top: 1px solid #dee2e6;
+      word-break: break-all;
+      line-height: 1;
+    }
+
+    tr:hover td {
+      background-color: rgba(0, 0, 0, .075);
+      transition: 0.5s;
+    }
+
+    th {
+      padding: 1rem;
+      text-align: left;
+      font-size: 83%;
+    }
+
     td {
-      margin: 0;
-      padding: 0.5rem;
-      border-bottom: 1px solid lightgray;
-      border-right: 1px solid lightgray;
-
-      :last-child {
-        border-right: 0;
-      }
-    }
-  .th-sort {
-    display: flex;
-    justify-content: center;
-    align-items: flex-end;
-    .icon {
-      padding-left: .3rem;
+      padding: 0.6rem 1rem;
+      text-align: left;
     }
   }
 }

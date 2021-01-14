@@ -1,16 +1,19 @@
 import axios from "axios";
-import { actionTypes as types, urls } from "../../../constants";
+import { actionTypes as types, urls, special } from "../../../constants";
 
 export const getAuthUsers = (params) => {
     return async function (dispatch) {
-        await axios.get(`${urls.AUTH}`, {
+        await axios.get(`${urls.AUTH}${special.json}`, {
             params,
         })
             .then((response) => {
                 dispatch({
                     type: types.AUTH_UPDATE,
                     payload: {
-                        authUsers: response.data,
+                        authUsers: Object.entries(response.data).map((item) => {
+                            item[1]['id'] = item[0]
+                            return item[1]
+                        }),
                     },
                 });
             }).catch(error => {
@@ -28,7 +31,7 @@ export const addAuthUser = (user) => {
     } = user;
 
     return async function () {
-        await axios.post(`${urls.AUTH}`, {
+        await axios.post(`${urls.AUTH}${special.json}`, {
             name: name,
             surname: surname,
             password: password,

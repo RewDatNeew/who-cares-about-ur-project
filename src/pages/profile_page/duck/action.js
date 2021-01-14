@@ -1,5 +1,5 @@
 import axios from "axios";
-import {urls} from "../../../constants";
+import { urls ,special } from "../../../constants";
 
 export const editUserPassword = (user) => {
     const {
@@ -9,7 +9,7 @@ export const editUserPassword = (user) => {
         login
     } = user
     return async function () {
-        await axios.put(`${urls.AUTH}/${id}`, {
+        await axios.put(`${urls.AUTH}/${id}${special.json}`, {
             password,
             name,
             login
