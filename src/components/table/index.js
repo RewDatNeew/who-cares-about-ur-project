@@ -6,8 +6,8 @@ export const Table = (props) => {
     const { data, searchResult, cells, addThs = [], customTd = {} } = props;
     const result = !isEmpty(searchResult) ? searchResult : data;
 
-    const cellMap = (cell) => {
-            return <th><span>{cell?.label}</span></th>
+    const cellMap = (cell, i) => {
+            return <th key={i}><span>{cell?.label}</span></th>
     }
 
     const onTableRow = (row, cells) => {
