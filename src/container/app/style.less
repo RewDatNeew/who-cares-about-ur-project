@@ -1,36 +1,35 @@
-@import (reference) "../../styles/style.less";
-
-.AppContainer {
+.app-container {
+  box-shadow: 0 0 5px #F5DF4D;
+  background: linear-gradient(45deg, rgba(60, 66, 67, 0.6), rgba(139, 147, 154, 0.3));
+  backdrop-filter: blur(1rem);
+  border-radius: 2rem;
+  min-height: 80vh;
+  width: 85%;
   display: flex;
-  flex-direction: column;
-  height: 100vh;
-  overflow: hidden;
-
-  .header {
-    height: 40px;
+  z-index: 3;
+  .control-panel {
+    display: flex;
+    width: 200px;
+    flex-direction: column;
+    border-radius: 2rem;
     box-shadow: 0 0 5px #F5DF4D;
-    background: linear-gradient(45deg, #5B6467, #8B939A);
-    display: flex;
     align-items: center;
-    flex-shrink: 0;
-    box-sizing: border-box;
-    justify-content: space-between;
-  }
-  .main {
-    display: flex;
-    flex-direction: row-reverse;
-    flex-wrap: nowrap;
-    flex-grow: 1;
-    height: 100%;
-
-    .component {
-      margin: 1rem;
-      width: 100%;
+    .header {
+      align-items: center;
+      flex-direction: column;
+      display: flex;
+      justify-content: space-evenly;
+      padding: 1rem
     }
   }
-
-  .auth-page {
-    display: flex;
-    justify-content: center;
+  .main {
+    flex: 2;
   }
+}
+
+.auth-page {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
 }

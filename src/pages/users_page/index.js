@@ -188,10 +188,10 @@ const UsersPage = (props) => {
         }
     };
 
-    const addThs = [<th />, <th />]
+    const addThs = [<th key={'1'} />, <th key={'2'} />]
 
     return (
-        <div className="contentGrid users-page">
+        <div className="users-page">
             <HeaderPage title={props.item.label} icon={props.item.icon} />
             <ConfigControl
                 searchInput={searchInput}
@@ -206,15 +206,13 @@ const UsersPage = (props) => {
                 changePageNumber={changePageNumber}
                 changeValuePerPage={changeValuePerPage}
             />
-            <span className="scrollBox">
-                {!isEmpty(users) ? <Table
-                    cells={cells}
-                    data={users}
-                    searchResult={searchResult}
-                    addThs={addThs}
-                    customTd={customTd}
-                /> : null}
-            </span>
+            {!isEmpty(users) ? <Table
+                cells={cells}
+                data={users}
+                searchResult={searchResult}
+                addThs={addThs}
+                customTd={customTd}
+            /> : null}
             <ModalAdd
                 isOpenModalAdd={isOpenModalAdd}
                 nameInput={nameInput}

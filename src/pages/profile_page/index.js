@@ -86,7 +86,7 @@ const ProfilePage = (props) => {
     }
 
     return (
-        <div className="contentGrid profile-page">
+        <div className="profile-page">
             <HeaderPage title={props.item.label} icon={props.item.icon} />
             <ChangePasswordModal
                 currentPasswordInput={currentPasswordInput}

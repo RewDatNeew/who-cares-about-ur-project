@@ -53,15 +53,17 @@ const AppContainer = (props) => {
 
   return (
       <SnackbarProvider maxSnack={3}>
-        <div className="AppContainer">
-          <Header user={currentUser} logOut={logOut} />
-            {
-                !isLogin
-                    ? <div className="auth-page">
-                        <Auth />
-                      </div>
-                    : <div className="main">
+          <div className="app-container">
+            {!isLogin
+                ? <div className="auth-page">
+                    <Auth />
+                  </div>
+                : <>
+                    <div className="control-panel">
+                        <Header user={currentUser} logOut={logOut} />
                         <SideBar />
+                    </div>
+                    <div className="main">
                         <div className="component">
                             <Switch>
                                 <Redirect
@@ -90,10 +92,11 @@ const AppContainer = (props) => {
                                     })}
                                 <Route render={(ren) => <NotFoundPage {...ren} />} />
                             </Switch>
-                        </div>
+                         </div>
                     </div>
+                </>
             }
-        </div>
+          </div>
       </SnackbarProvider>
   );
 }

@@ -13,7 +13,7 @@ export const Header = (props) => {
                 <div className="project-title">
                     <Icon name="project" size={22} />
                     <div className="title-header">
-                        Who Cares About Ur Project?
+                        W.C.A.U.P.
                     </div>
                 </div>
                 { user.login !== ''

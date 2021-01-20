@@ -1,9 +1,6 @@
-@import (reference) "../../styles/style.less";
-
 .header {
     .project-title {
       display: flex;
-      margin: 1rem 1rem 1rem 1.4rem;
       .title-header {
         margin-left: .5rem;
         font-size: 20px;
@@ -11,9 +8,12 @@
     }
     .user-control {
       display: flex;
+      flex-direction: row;
+      align-items: center;
+      padding-left: 1rem;
       .current-user {
         display: flex;
-        margin: 1rem;
+        padding-bottom: .2rem;
         .icon {
           margin-top: 3px;
         }
