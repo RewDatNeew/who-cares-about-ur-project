@@ -9,9 +9,9 @@ export const useSearch = ({data, updateStore}) => {
     const searchAction = () => {
         const searchResult = data.reduce((acc, item) => {
             const { name, location, age } = item;
-            if (name && name.toLowerCase().includes(search)
-                || location && location.toLowerCase().includes(search)
-                || age && age.toLowerCase().includes(search)) {
+            if ((name && name.toLowerCase().includes(search))
+                || (location && location.toLowerCase().includes(search))
+                || (age && age.toLowerCase().includes(search))) {
                 acc.push(item);
                 return acc
             }
