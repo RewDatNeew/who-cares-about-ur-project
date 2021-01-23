@@ -4,9 +4,10 @@ import { connect } from 'react-redux';
 import { HeaderPage, IconButton, Pagination, Table } from "../../components";
 import {useInput, useUpdateStore} from "../../hooks";
 import { isEmpty } from "../../helpers";
-import { getUsers, addUser, deleteUser, editUser, searchUser, getLimitedUsers } from "./duck/action";
+import { getUsers, addUser, deleteUser, editUser } from "./duck/action";
 import { ConfigControl } from "./components/config-control";
 import { ModalAdd, ModalEdit } from "./components/modals";
+import { useSearch } from './hooks';
 import './style.less';
 
 const UsersPage = (props) => {
@@ -19,11 +20,7 @@ const UsersPage = (props) => {
         isOpenModalEdit = false,
         isOpenModalAdd = false,
         currentUser = {},
-        search = '',
         searchResult = [],
-        page = 0,
-        totalElements = 0,
-        size = 0,
         cells = [],
     } = props.users;
 
@@ -36,14 +33,6 @@ const UsersPage = (props) => {
 
     const handleGetUsers = () => {
         props.dispatch(getUsers());
-    }
-
-    const handleSendPageParams = () => {
-        const {
-            page,
-            size,
-        } = usersRef.current;
-        props.dispatch(getLimitedUsers({ page, size }));
     }
 
     useEffect(() => {
@@ -73,16 +62,6 @@ const UsersPage = (props) => {
         name: 'age',
         label: 'age'
     })
-
-    const searchInput = useInput({
-        updateStore,
-        name: 'search',
-        label: 'search',
-    })
-
-    const handleSendSearch = async () => {
-        await props.dispatch(searchUser(search));
-    }
 
     const user = {
         name,
@@ -158,21 +137,6 @@ const UsersPage = (props) => {
         updateStore(payload);
     }
 
-    const changePageNumber = async (page) => {
-        await updateStore({
-            page: page - 1,
-        })
-        handleSendPageParams()
-    }
-
-    const changeValuePerPage = async (value) => {
-        await updateStore({
-            page,
-            size: value,
-        })
-        handleSendPageParams();
-    }
-
     const customTd = (row) => {
         if (row !== null) {
             return (
@@ -188,6 +152,8 @@ const UsersPage = (props) => {
         }
     };
 
+    const searchInput = useSearch({ data: users, updateStore })
+
     const addThs = [<th key={'1'} />, <th key={'2'} />]
 
     return (
@@ -196,15 +162,8 @@ const UsersPage = (props) => {
             <ConfigControl
                 searchInput={searchInput}
                 handleOpenAdding={handleOpenAdding}
-                handleSendSearch={handleSendSearch}
             />
             <Pagination
-                page={page}
-                size={size}
-                totalElements={totalElements}
-                updateStore={updateStore}
-                changePageNumber={changePageNumber}
-                changeValuePerPage={changeValuePerPage}
             />
             {!isEmpty(users) ? <Table
                 cells={cells}

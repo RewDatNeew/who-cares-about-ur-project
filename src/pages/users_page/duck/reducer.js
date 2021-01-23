@@ -2,12 +2,10 @@ import { actionTypes as types } from '../../../constants';
 
 const initialState = {
     users: [],
+    searchResult: [],
 
     isOpenModalEdit: false,
     isOpenModalAdd: false,
-
-    search: '',
-    searchResult: [],
 
     id: 0,
     name: '',

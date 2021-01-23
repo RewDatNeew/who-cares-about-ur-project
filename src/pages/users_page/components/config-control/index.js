@@ -4,9 +4,8 @@ import './style.less';
 
 export const ConfigControl = (props) => {
     const {
+        searchInput = {},
         handleOpenAdding = () => console.log('handleOpenAdding'),
-        handleSendSearch = () => console.log('handleSendSearch'),
-        searchInput = () => console.log('searchInput'),
     } = props;
 
     return (
@@ -14,7 +13,6 @@ export const ConfigControl = (props) => {
             <div className="config">
                 {searchInput}
                 <div>
-                    <Button title="Search" onClick={handleSendSearch} />
                     <Button title="Add User" onClick={handleOpenAdding} />
                 </div>
             </div>

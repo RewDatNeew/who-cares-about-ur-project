@@ -74,34 +74,41 @@ export const editUser = (user) => {
     }
 }
 
-export const searchUser = (search) => {
-    return async function (dispatch) {
-        await axios.get(`${urls.USERS}?q=${search}${special.json}`)
-            .then(resp => {
-                dispatch({
-                    type: types.USERS_UPDATE,
-                    payload: {
-                        searchResult: resp.data,
-                    },
-                });
-            }).catch(error => {
-                console.log(error);
-            });
-    }
-}
+// export const searchUser = (filter) => {
+//     const key = Object.keys(filter).toString();
+//     const prepareValue = Object.values(filter)
+//     const value = prepareValue[0].value
+//
+//     return async function (dispatch) {
+//         await axios.get(`${urls.USERS}${special.json}?orderBy="$value"&startAt=${value}&endAt=${value}&print=pretty`)
+//             .then(resp => {
+//                 dispatch({
+//                     type: types.USERS_UPDATE,
+//                     payload: {
+//                         filteredUsers: Object.entries(resp.data).map((item) => {
+//                             item[1]['id'] = item[0]
+//                             return item[1]
+//                         }),
+//                     },
+//                 });
+//             }).catch(error => {
+//                 console.log(error);
+//             });
+//     }
+// }
 
-export const getLimitedUsers = ({ page, size }) => {
-    return async function (dispatch) {
-        await axios.get(`${urls.USERS}?_limit=${size}&_page=${page}${special.json}`, )
-            .then((response) => {
-                dispatch({
-                    type: types.USERS_UPDATE,
-                    payload: {
-                        users: response.data,
-                    },
-                });
-            }).catch(error => {
-                console.log(error);
-            });
-    };
-}
+// export const getLimitedUsers = () => {
+//     return async function (dispatch) {
+//         await axios.get(`${urls.USERS}${special.json}?shallow=true`, )
+//             .then((response) => {
+//                 dispatch({
+//                     type: types.USERS_UPDATE,
+//                     payload: {
+//                         paginatedUsers: Object.keys(response.data),
+//                     },
+//                 });
+//             }).catch(error => {
+//                 console.log(error);
+//             });
+//     };
+// }
