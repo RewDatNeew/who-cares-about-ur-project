@@ -4,6 +4,7 @@ import { auth } from './container/auth/duck/reducer';
 import { home } from './pages/home_page/duck/reducer';
 import { users } from './pages/users_page/duck/reducer';
 import { profile } from "./pages/profile_page/duck/reducer";
+import { admin } from './pages/administration_page/duck/reducer'
 
 export default combineReducers({
     auth,
@@ -11,4 +12,5 @@ export default combineReducers({
     home,
     users,
     profile,
+    admin,
 });

@@ -7,7 +7,7 @@ const HomePage = (props) => {
     // const updateStore = useUpdateStore({ type: types.HOME_UPDATE })
 
     return (
-        <div className="contentGrid home-page">
+        <div className="home-page">
             <HeaderPage title={props.item.label} icon={props.item.icon} />
         </div>
     )

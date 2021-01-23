@@ -9,6 +9,7 @@ import Auth from "../auth";
 import { SnackbarProvider } from "notistack";
 import {useUpdateStore} from "../../hooks";
 import {actionTypes as types} from "../../constants";
+import { isRight } from "../../helpers/isRight";
 import './style.less';
 
 const AppContainer = (props) => {
@@ -27,7 +28,7 @@ const AppContainer = (props) => {
           const user = localStorage.getItem('user')
           const parsedUser = JSON.parse(user)
           const {
-              login = '', name = '', password = '', id = '',
+              login = '', name = '', password = '', id = '', rights,
           } = parsedUser
 
           const encodedPass = atob(password);
@@ -37,6 +38,7 @@ const AppContainer = (props) => {
               currentUser: {
                   login,
                   name,
+                  rights,
                   password: encodedPass,
                   id: encodedId,
               }
@@ -51,6 +53,10 @@ const AppContainer = (props) => {
       window.location.reload(false);
   }
 
+  const { rights = '' } = currentUser;
+  const rightsArr = [];
+  rightsArr.push(rights.toUpperCase())
+
   return (
       <SnackbarProvider maxSnack={3}>
           <div className="app-container">
@@ -61,7 +67,7 @@ const AppContainer = (props) => {
                 : <>
                     <div className="control-panel">
                         <Header user={currentUser} logOut={logOut} />
-                        <SideBar />
+                        <SideBar rightsArr={rightsArr} />
                     </div>
                     <div className="main">
                         <div className="component">
@@ -72,6 +78,10 @@ const AppContainer = (props) => {
                                     to="/home"
                                 />
                                 {routes
+                                    .filter((item) => {
+                                        const isVisible = isRight({rights: item.rights, userRights: rightsArr});
+                                        return isVisible || !item.rights.length;
+                                    })
                                     .map((route, i) => {
                                         if (route.children) {
                                             return route.children.map((child) => {

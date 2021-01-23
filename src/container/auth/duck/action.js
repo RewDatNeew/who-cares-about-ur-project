@@ -27,7 +27,8 @@ export const addAuthUser = (user) => {
         name,
         surname,
         password,
-        login
+        login,
+        rights,
     } = user;
 
     return async function () {
@@ -36,6 +37,7 @@ export const addAuthUser = (user) => {
             surname: surname,
             password: password,
             login: login,
+            rights: rights,
         }).then(resp => {
             console.log(resp.data);
         }).catch(error => {

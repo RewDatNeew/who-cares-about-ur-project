@@ -5,6 +5,7 @@ const initialState = {
         login: '',
         name: '',
         password: '',
+        rights: '',
         id: 0,
     },
 };

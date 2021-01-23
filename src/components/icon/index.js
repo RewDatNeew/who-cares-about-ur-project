@@ -15,6 +15,7 @@ import { ReactComponent as UserIcon } from './../../svg/user.svg';
 import { ReactComponent as LogOutIcon } from './../../svg/logout.svg';
 import { ReactComponent as EyeIcon } from './../../svg/eye.svg';
 import { ReactComponent as EyeNonIcon } from './../../svg/eye-non.svg';
+import { ReactComponent as AdminIcon } from './../../svg/admin.svg';
 
 
 export const Icon = ({ size = '1em', fill = 'currentColor', name, cn = '' }) => {
@@ -34,6 +35,7 @@ export const Icon = ({ size = '1em', fill = 'currentColor', name, cn = '' }) => 
         'log-out': LogOutIcon,
         eye: EyeIcon,
         'eye-non': EyeNonIcon,
+        admin: AdminIcon,
     }[name];
 
     return (

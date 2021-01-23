@@ -8,3 +8,5 @@ export const HOME_UPDATE = 'HOME_UPDATE';
 
 export const USERS_UPDATE = 'USERS_UPDATE';
 
+export const ADMIN_UPDATE = 'ADMIN_UPDATE';
+

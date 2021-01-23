@@ -61,7 +61,8 @@ const Auth = (props) => {
                 login,
                 name: certainObj.name,
                 password: btoa(certainObj.password),
-                id: btoa(certainObj.id)
+                id: btoa(certainObj.id),
+                rights: certainObj.rights,
             }
 
             if (certainObj.password === password) {
@@ -110,6 +111,7 @@ const Auth = (props) => {
                 name,
                 login,
                 password,
+                rights: 'SIMPLE'
             }
             await props.dispatch(addAuthUser(authUser));
             enqueueSnackbar(`Пользователь ${login} успешно создан`)
