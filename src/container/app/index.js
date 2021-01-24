@@ -31,7 +31,6 @@ const AppContainer = (props) => {
               login = '', name = '', password = '', id = '', rights,
           } = parsedUser
 
-          const encodedPass = atob(password);
           const encodedId = Number(atob(id));
 
           updateStore({
@@ -39,7 +38,7 @@ const AppContainer = (props) => {
                   login,
                   name,
                   rights,
-                  password: encodedPass,
+                  password,
                   id: encodedId,
               }
           })

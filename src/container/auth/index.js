@@ -7,6 +7,7 @@ import { useInput, useUpdateStore } from "../../hooks";
 import { actionTypes as types } from "../../constants";
 import { addAuthUser, getAuthUsers } from "./duck/action";
 import { SignInModal } from "./modals";
+const bcrypt = require('bcryptjs');
 
 const Auth = (props) => {
     const {
@@ -60,12 +61,14 @@ const Auth = (props) => {
             const user = {
                 login,
                 name: certainObj.name,
-                password: btoa(certainObj.password),
+                password: certainObj.password,
                 id: btoa(certainObj.id),
                 rights: certainObj.rights,
             }
 
-            if (certainObj.password === password) {
+            const isPass = bcrypt.compareSync(password, certainObj.password)
+
+            if (isPass) {
                 localStorage.setItem('isLogin', 'true');
                 localStorage.setItem('user', JSON.stringify(user))
                 window.location.reload(false);

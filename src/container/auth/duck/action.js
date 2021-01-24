@@ -1,5 +1,6 @@
 import axios from "axios";
 import { actionTypes as types, urls, special } from "../../../constants";
+const bcrypt = require('bcryptjs');
 
 export const getAuthUsers = (params) => {
     return async function (dispatch) {
@@ -22,6 +23,7 @@ export const getAuthUsers = (params) => {
     };
 }
 
+
 export const addAuthUser = (user) => {
     const {
         name,
@@ -31,11 +33,14 @@ export const addAuthUser = (user) => {
         rights,
     } = user;
 
+    const salt = bcrypt.genSaltSync(10);
+    const hash = bcrypt.hashSync(password, salt);
+
     return async function () {
         await axios.post(`${urls.AUTH}${special.json}`, {
             name: name,
             surname: surname,
-            password: password,
+            password: hash,
             login: login,
             rights: rights,
         }).then(resp => {
