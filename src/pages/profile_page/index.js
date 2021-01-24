@@ -7,6 +7,7 @@ import { ChangePasswordModal } from "./modals";
 import {useInput, useUpdateStore} from "../../hooks";
 import { actionTypes as types } from "../../constants";
 import { useSnackbar } from "notistack";
+const bcrypt = require('bcryptjs');
 
 const ProfilePage = (props) => {
     const {
@@ -19,7 +20,9 @@ const ProfilePage = (props) => {
     const {
         isOpenPasswordModal = false,
         currentPassword = '',
-        newPassword = ','
+        newPassword = '',
+        hashedPass = '',
+        isPass = false,
     } = props.profile;
 
     const {
@@ -56,23 +59,29 @@ const ProfilePage = (props) => {
         window.location.reload(false)
     }
 
+    const user = localStorage.getItem('user')
+    const parsedUser = JSON.parse(user)
+
     const handleChangePassword = async () => {
-        if (currentPassword === password) {
-            if (newPassword !== password) {
+        const isPass = bcrypt.compareSync(currentPassword, parsedUser.password)
+        if (isPass) {
+            if (newPassword !== currentPassword) {
                 const user = {
                     id,
                     login: login,
                     name: name,
-                    password: newPassword
+                    password: newPassword,
+                    rights: 'SIMPLE',
                 }
                 await props.dispatch(editUserPassword(user))
                 enqueueSnackbar(`Пароль успешно изменен`)
 
                 const storageUser = {
-                    id: btoa(id),
-                    password: btoa(newPassword),
+                    id,
+                    password,
                     login,
                     name,
+                    rights: 'SIMPLE',
                 }
                 localStorage.setItem('user', JSON.stringify(storageUser))
                 handleCloseModal();

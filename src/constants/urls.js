@@ -4,3 +4,5 @@ export const FIREBASE_API = 'https://whocaresabouturproject-default-rtdb.europe-
 export const USERS = `${FIREBASE_API}/users`
 
 export const AUTH = `${FIREBASE_API}/auth`
+
+export const REGISTERED = `${FIREBASE_API}/registered`

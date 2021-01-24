@@ -25,6 +25,7 @@ const Auth = (props) => {
     }, [])
 
     const updateStore = useUpdateStore({ type: types.AUTH_UPDATE })
+    const updateStoreProfile = useUpdateStore({ type: types.PROFILE_UPDATE })
 
     const handleOpenSignIn = () => {
         updateStore({
@@ -62,11 +63,13 @@ const Auth = (props) => {
                 login,
                 name: certainObj.name,
                 password: certainObj.password,
-                id: btoa(certainObj.id),
+                id: certainObj.id,
                 rights: certainObj.rights,
             }
 
             const isPass = bcrypt.compareSync(password, certainObj.password)
+
+            updateStoreProfile({ isPass, hashedPass: certainObj.password })
 
             if (isPass) {
                 localStorage.setItem('isLogin', 'true');

@@ -31,15 +31,13 @@ const AppContainer = (props) => {
               login = '', name = '', password = '', id = '', rights,
           } = parsedUser
 
-          const encodedId = Number(atob(id));
-
           updateStore({
               currentUser: {
                   login,
                   name,
                   rights,
                   password,
-                  id: encodedId,
+                  id,
               }
           })
       }

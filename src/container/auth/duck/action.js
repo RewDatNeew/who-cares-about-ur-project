@@ -17,6 +17,12 @@ export const getAuthUsers = (params) => {
                         }),
                     },
                 });
+                dispatch({
+                    type: types.ADMIN_UPDATE,
+                    payload: {
+                        registered: response.data,
+                    },
+                });
             }).catch(error => {
                 console.log(error);
             });
