@@ -62,6 +62,12 @@ export const signOut = () => {
         await fb.auth().signOut().then(() => {
             useNotification({message: 'Sign-out successful', dispatch})
             console.log('Sign-out successful')
+            dispatch({
+                type: types.APP_UPDATE,
+                payload: {
+                    currentUser: {}
+                },
+            });
         }).catch((error) => {
             console.log({error})
         });

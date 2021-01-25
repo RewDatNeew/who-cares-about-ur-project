@@ -15,10 +15,6 @@ const Auth = (props) => {
         email,
     } = props.auth;
 
-    const {
-        currentUser = {}
-    } = props.app;
-
     useEffect(() => {
         props.dispatch(authStateChange())
     }, [])
@@ -82,7 +78,6 @@ const Auth = (props) => {
         await props.dispatch(signUpUser(authUser));
         // eslint-disable-next-line react-hooks/rules-of-hooks
         useNotification({message: `Пользователь ${email} успешно создан`})
-        window.location.reload(false);
         handleCloseModal();
     }
 
@@ -92,10 +87,6 @@ const Auth = (props) => {
             password
         }
         await props.dispatch(signInUser(user));
-        if (Object.keys(currentUser).length !== 0) {
-            localStorage.setItem('isLogin', 'true');
-            window.location.reload(false);
-        }
     }
 
     return (

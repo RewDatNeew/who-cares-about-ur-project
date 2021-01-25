@@ -3,7 +3,10 @@ import { actionTypes as types } from '../../../constants';
 const initialState = {
     currentUser: {},
 
-    notification: '',
+    notification: {
+        current: '',
+        new: '',
+    },
 };
 
 export const app = (state = initialState, action) => {

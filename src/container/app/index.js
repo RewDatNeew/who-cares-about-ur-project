@@ -1,4 +1,5 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect} from 'react';
+import { actionTypes as types } from '../../constants'
 import { routes } from '../../routes';
 import { connect } from "react-redux";
 import { Header } from "../header";
@@ -9,49 +10,46 @@ import Auth from "../auth";
 import { signOut } from "../auth/duck/action";
 import { isRight } from "../../helpers/isRight";
 import { useSnackbar } from "notistack";
+import { useUpdateStore } from "../../hooks";
 import './style.less';
 
 const AppContainer = (props) => {
   const {
       currentUser = {},
-      notification = '',
+      notification = {},
   } = props.app;
 
   const { enqueueSnackbar } = useSnackbar()
 
-
-    console.log({notification})
-
-  // const updateStore = useUpdateStore({ type: types.APP_UPDATE })
-
-  const [isLogin, setIsLogin] = useState(false);
-
-    useEffect(() => {
-        const isLogin = localStorage.getItem('isLogin') === 'true';
-        setIsLogin(isLogin);
-    }, [isLogin])
-
-  // TODO очищать уведомления
+  const updateStore = useUpdateStore({ type: types.APP_UPDATE })
 
   useEffect( () => {
-      if (notification !== '') {
-          enqueueSnackbar(notification || '')
+      if (notification.current !== '') {
+          enqueueSnackbar(notification.new || '')
       }
-  }, [notification])
+
+      const payload = {
+          notification: {
+              current: ''
+          }
+      }
+      updateStore(payload)
+
+  }, [notification.new])
 
   const logOut = () => {
       props.dispatch(signOut())
-      localStorage.clear();
-      window.location.reload(false);
   }
 
   const { displayName = '', photoURL = '' } = currentUser;
   const rightsArr = [];
-  rightsArr.push(photoURL.toUpperCase())
+  rightsArr.push(photoURL?.toUpperCase())
+
+  const isUserLogged = Object.keys(currentUser).length !== 0;
 
   return (
           <div className="app-container">
-            {!isLogin
+            {!isUserLogged
                 ? <div className="auth-page">
                     <Auth />
                   </div>

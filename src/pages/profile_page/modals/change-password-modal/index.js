@@ -7,7 +7,6 @@ export const ChangePasswordModal = (props) => {
         handleCloseModal = () => console.log('handleCloseModal'),
         handleChangePassword = () => console.log('handleChangePassword'),
         newPasswordInput = () => console.log('newPasswordInput'),
-        currentPasswordInput = () => console.log('currentPasswordInput'),
     } = props;
     return (
         <>
@@ -20,7 +19,6 @@ export const ChangePasswordModal = (props) => {
                     modalAction={handleChangePassword}
                     closeModal={handleCloseModal}>
                     <div className="modal-input-zone">
-                        {currentPasswordInput}
                         {newPasswordInput}
                     </div>
                   </Modal>

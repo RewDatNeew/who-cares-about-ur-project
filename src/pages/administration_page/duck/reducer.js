@@ -1,7 +1,6 @@
 import { actionTypes as types } from '../../../constants';
 
 const initialState = {
-    registered: []
 };
 
 export const admin = (state = initialState, action) => {
