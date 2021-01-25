@@ -4,14 +4,15 @@ import { Button, Icon } from "../../components";
 import { connect } from "react-redux";
 import { useInput, useUpdateStore, useNotification } from "../../hooks";
 import { actionTypes as types } from "../../constants";
-import { signInUser, signUpUser, authStateChange } from "./duck/action";
-import { SignInModal } from "./modals";
+import { signInUser, signUpUser, authStateChange, changePassword } from "./duck/action";
+import {ResetPassModal, SignInModal} from "./modals";
 
 const Auth = (props) => {
     const {
         displayName,
         password,
         isOpenSignInModal = false,
+        isOpenResetPasswordModal = false,
         email,
     } = props.auth;
 
@@ -29,16 +30,16 @@ const Auth = (props) => {
 
     // LOG IN /////////////////////////////////////////////////////////////////////
 
-    const loginLogInInput = useInput({
+    const emailLogInInput = useInput({
         updateStore,
         name: 'email',
-        label: 'email'
+        label: 'e-mail'
     })
     const passwordLogInInput = useInput({
         type: 'password',
         updateStore,
         name: 'password',
-        label: 'password'
+        label: 'пароль'
     })
 
 
@@ -47,25 +48,26 @@ const Auth = (props) => {
     const nameSignInInput = useInput({
         updateStore,
         name: 'displayName',
-        label: 'name'
+        label: 'имя'
     })
 
-    const loginSignInInput = useInput({
+    const emailSignInInput = useInput({
         updateStore,
         name: 'email',
-        label: 'email'
+        label: 'e-mail'
     })
 
     const passwordSignInInput = useInput({
         type: 'password',
         updateStore,
         name: 'password',
-        label: 'password'
+        label: 'пароль'
     })
 
     const handleCloseModal = () => {
         updateStore({
             isOpenSignInModal: false,
+            isOpenResetPasswordModal: false,
         })
     }
 
@@ -89,6 +91,17 @@ const Auth = (props) => {
         await props.dispatch(signInUser(user));
     }
 
+    const handleOpenResetPasswordModal = () => {
+        updateStore({
+            isOpenResetPasswordModal: !isOpenResetPasswordModal,
+        })
+    }
+
+    const handleChangePassword = () => {
+        props.dispatch(changePassword(email))
+        handleCloseModal()
+    }
+
     return (
         <div className="auth">
             <Icon name="user" size={40}/>
@@ -97,16 +110,23 @@ const Auth = (props) => {
                 handleSignIn={handleSignUp}
                 handleCloseModal={handleCloseModal}
                 nameSignInInput={nameSignInInput}
-                loginSignInInput={loginSignInInput}
+                emailSignInInput={emailSignInInput}
                 passwordSignInInput={passwordSignInInput}
             />
+            <ResetPassModal
+                isOpenResetPasswordModal={isOpenResetPasswordModal}
+                handleCloseModal={handleCloseModal}
+                emailSignInInput={emailSignInInput}
+                handleChangePassword={handleChangePassword}
+            />
             <div className="input-zone">
-                {loginLogInInput}
+                {emailLogInInput}
                 {passwordLogInInput}
             </div>
             <div className="button-zone">
-                <Button title="Sign In" onClick={handleOpenSignIn} />
-                <Button title="Log In" onClick={handleSignIn} />
+                <Button title="Вход" onClick={handleSignIn} />
+                <Button title="Регистрация" onClick={handleOpenSignIn} />
+                <Button title="Восстановление пароля" onClick={handleOpenResetPasswordModal} />
             </div>
         </div>
     )

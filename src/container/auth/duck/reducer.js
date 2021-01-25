@@ -4,6 +4,7 @@ const initialState = {
     isLogin: false,
 
     isOpenSignInModal: false,
+    isOpenResetPasswordModal: false,
 
     displayName: '',
     password: '',

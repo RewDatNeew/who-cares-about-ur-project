@@ -91,3 +91,14 @@ export const authStateChange = () => {
         });
     }
 }
+
+export const changePassword = (email) => {
+    const auth = fb.auth();
+    return async function (dispatch) {
+        auth.sendPasswordResetEmail(email).then(function() {
+            useNotification({message: 'Письмо с восстановлением отправлено', dispatch})
+        }).catch(function(error) {
+            // An error happened.
+        });
+    }
+}

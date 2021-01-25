@@ -33,7 +33,7 @@ export const Modal = (props) => {
                 </div>
                 <div className="footer-modal">
                     <Button title={actionTitle} style="secondary" onClick={modalAction} />
-                    <Button title="Close modal" style="secondary" onClick={closeModal} />
+                    <Button title="Закрыть" style="secondary" onClick={closeModal} />
                 </div>
             </div>
         </div>
