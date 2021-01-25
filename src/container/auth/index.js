@@ -1,31 +1,29 @@
 import React, { useEffect } from 'react';
-import { useSnackbar } from 'notistack'
 import './style.less';
 import { Button, Icon } from "../../components";
 import { connect } from "react-redux";
-import { useInput, useUpdateStore } from "../../hooks";
+import { useInput, useUpdateStore, useNotification } from "../../hooks";
 import { actionTypes as types } from "../../constants";
-import { addAuthUser, getAuthUsers } from "./duck/action";
+import { signInUser, signUpUser, authStateChange } from "./duck/action";
 import { SignInModal } from "./modals";
-const bcrypt = require('bcryptjs');
 
 const Auth = (props) => {
     const {
-        name,
-        login,
+        displayName,
         password,
-        authUsers = [],
         isOpenSignInModal = false,
+        email,
     } = props.auth;
 
-    const { enqueueSnackbar } = useSnackbar()
+    const {
+        currentUser = {}
+    } = props.app;
 
     useEffect(() => {
-        props.dispatch(getAuthUsers())
+        props.dispatch(authStateChange())
     }, [])
 
     const updateStore = useUpdateStore({ type: types.AUTH_UPDATE })
-    const updateStoreProfile = useUpdateStore({ type: types.PROFILE_UPDATE })
 
     const handleOpenSignIn = () => {
         updateStore({
@@ -33,18 +31,12 @@ const Auth = (props) => {
         })
     }
 
-    const loginsArr = authUsers.map((item) => {
-        return item.login;
-    })
-
-
-
     // LOG IN /////////////////////////////////////////////////////////////////////
 
     const loginLogInInput = useInput({
         updateStore,
-        name: 'login',
-        label: 'login'
+        name: 'email',
+        label: 'email'
     })
     const passwordLogInInput = useInput({
         type: 'password',
@@ -54,48 +46,18 @@ const Auth = (props) => {
     })
 
 
-
-    const handleLogIn = () => {
-        if (loginsArr.includes(login)) {
-            const idxLogin = authUsers.findIndex(x => x.login === login);
-            const certainObj = authUsers[idxLogin];
-            const user = {
-                login,
-                name: certainObj.name,
-                password: certainObj.password,
-                id: certainObj.id,
-                rights: certainObj.rights,
-            }
-
-            const isPass = bcrypt.compareSync(password, certainObj.password)
-
-            updateStoreProfile({ isPass, hashedPass: certainObj.password })
-
-            if (isPass) {
-                localStorage.setItem('isLogin', 'true');
-                localStorage.setItem('user', JSON.stringify(user))
-                window.location.reload(false);
-            } else {
-                return enqueueSnackbar(`Неверный пароль`)
-            }
-        } else {
-            return enqueueSnackbar(`Пользователь ${login} не найден`)
-        }
-    }
-
-
     // SIGN IN (ALL THIS PROPS TO MODAL SIGN IN COMPONENT) ////////////////////////
 
     const nameSignInInput = useInput({
         updateStore,
-        name: 'name',
+        name: 'displayName',
         label: 'name'
     })
 
     const loginSignInInput = useInput({
         updateStore,
-        name: 'login',
-        label: 'login'
+        name: 'email',
+        label: 'email'
     })
 
     const passwordSignInInput = useInput({
@@ -111,20 +73,28 @@ const Auth = (props) => {
         })
     }
 
-    const handleSignIn = async () => {
-        if (!loginsArr.includes(login)) {
+    const handleSignUp = async () => {
             const authUser = {
-                name,
-                login,
+                email,
                 password,
-                rights: 'SIMPLE'
+                displayName,
             }
-            await props.dispatch(addAuthUser(authUser));
-            enqueueSnackbar(`Пользователь ${login} успешно создан`)
+        await props.dispatch(signUpUser(authUser));
+        // eslint-disable-next-line react-hooks/rules-of-hooks
+        useNotification({message: `Пользователь ${email} успешно создан`})
+        window.location.reload(false);
+        handleCloseModal();
+    }
+
+    const handleSignIn = async () => {
+        const user = {
+            email,
+            password
+        }
+        await props.dispatch(signInUser(user));
+        if (Object.keys(currentUser).length !== 0) {
+            localStorage.setItem('isLogin', 'true');
             window.location.reload(false);
-            handleCloseModal();
-        } else {
-            return enqueueSnackbar(`Пользователь с логином ${login} уже существует`)
         }
     }
 
@@ -133,7 +103,7 @@ const Auth = (props) => {
             <Icon name="user" size={40}/>
             <SignInModal
                 isOpenSignInModal={isOpenSignInModal}
-                handleSignIn={handleSignIn}
+                handleSignIn={handleSignUp}
                 handleCloseModal={handleCloseModal}
                 nameSignInInput={nameSignInInput}
                 loginSignInInput={loginSignInInput}
@@ -145,7 +115,7 @@ const Auth = (props) => {
             </div>
             <div className="button-zone">
                 <Button title="Sign In" onClick={handleOpenSignIn} />
-                <Button title="Log In" onClick={handleLogIn} />
+                <Button title="Log In" onClick={handleSignIn} />
             </div>
         </div>
     )
@@ -154,5 +124,6 @@ const Auth = (props) => {
 export default connect((store) => {
     return {
         auth: store.auth,
+        app: store.app
     }
 })(Auth)

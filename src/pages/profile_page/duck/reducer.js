@@ -2,9 +2,6 @@ import { actionTypes as types } from '../../../constants';
 
 const initialState = {
     isOpenPasswordModal: false,
-
-    hashedPass: '',
-    isPass: false,
 };
 
 export const profile = (state = initialState, action) => {

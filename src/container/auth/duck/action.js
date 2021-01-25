@@ -1,58 +1,87 @@
-import axios from "axios";
-import { actionTypes as types, urls, special } from "../../../constants";
-const bcrypt = require('bcryptjs');
+import { fb } from "../../../index";
+import {actionTypes as types} from "../../../constants";
+import { useNotification } from "../../../hooks/useNotification";
 
-export const getAuthUsers = (params) => {
-    return async function (dispatch) {
-        await axios.get(`${urls.AUTH}${special.json}`, {
-            params,
-        })
-            .then((response) => {
-                dispatch({
-                    type: types.AUTH_UPDATE,
-                    payload: {
-                        authUsers: Object.entries(response.data).map((item) => {
-                            item[1]['id'] = item[0]
-                            return item[1]
-                        }),
-                    },
-                });
-                dispatch({
-                    type: types.ADMIN_UPDATE,
-                    payload: {
-                        registered: response.data,
-                    },
-                });
-            }).catch(error => {
-                console.log(error);
-            });
-    };
-}
-
-
-export const addAuthUser = (user) => {
+export const signUpUser = (authUser) => {
     const {
-        name,
-        surname,
-        password,
-        login,
-        rights,
-    } = user;
+        email, password, displayName
+    } = authUser;
 
-    const salt = bcrypt.genSaltSync(10);
-    const hash = bcrypt.hashSync(password, salt);
+    const rights = 'SIMPLE';
 
     return async function () {
-        await axios.post(`${urls.AUTH}${special.json}`, {
-            name: name,
-            surname: surname,
-            password: hash,
-            login: login,
-            rights: rights,
-        }).then(resp => {
-            console.log(resp.data);
-        }).catch(error => {
-            console.log(error);
+        await fb.auth().createUserWithEmailAndPassword(email, password)
+            .then((user) => {
+                console.log({user})
+            })
+            .catch((error) => {
+                const errorCode = error.code;
+                const errorMessage = error.message;
+                console.log({errorCode, errorMessage})
+            });
+
+        const user = fb.auth().currentUser;
+
+        await user.updateProfile({
+            displayName: displayName,
+            photoURL: rights
+        }).then(function() {
+            console.log('updated')
+        }).catch(function(error) {
+            console.log({error})
+        });
+    }
+}
+
+export const signInUser = (authUser) => {
+    const {
+        email, password
+    } = authUser;
+
+    return async function (dispatch) {
+        await fb.auth().signInWithEmailAndPassword(email, password)
+            .then((user) => {
+                dispatch({
+                    type: types.APP_UPDATE,
+                    payload: {
+                        currentUser: user
+                    },
+                });
+            })
+            .catch((error) => {
+                const errorCode = error.code;
+                const errorMessage = error.message;
+                useNotification({message: errorMessage, dispatch})
+                console.log({errorCode, errorMessage})
+            });
+    }
+}
+
+export const signOut = () => {
+    return async function (dispatch) {
+        await fb.auth().signOut().then(() => {
+            useNotification({message: 'Sign-out successful', dispatch})
+            console.log('Sign-out successful')
+        }).catch((error) => {
+            console.log({error})
+        });
+    }
+}
+
+export const authStateChange = () => {
+    return async function (dispatch) {
+        fb.auth().onAuthStateChanged((user) => {
+            if (user) {
+                dispatch({
+                    type: types.APP_UPDATE,
+                    payload: {
+                        currentUser: user
+                    },
+                });
+            } else {
+                // User is signed out
+                // ...
+            }
         });
     }
 }

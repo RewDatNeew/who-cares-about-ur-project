@@ -4,7 +4,7 @@ import { Icon, IconButton } from "../../components";
 
 export const Header = (props) => {
     const {
-        user = {},
+        displayName = '',
         logOut = () => console.log('logOut'),
     } = props;
 
@@ -16,16 +16,14 @@ export const Header = (props) => {
                         W.C.A.U.P.
                     </div>
                 </div>
-                { user.login !== ''
-                    ? <div className="user-control">
+
+                    <div className="user-control">
                         <div className="current-user">
                             <Icon name="user"/>
-                        <div className="user">{user.name}</div>
+                        <div className="user">{displayName}</div>
                         </div>
                         <IconButton name="log-out" onClick={logOut} fill="#f0f8ff" />
-                      </div>
-                    : null
-                }
+                    </div>
         </div>
     )
 }

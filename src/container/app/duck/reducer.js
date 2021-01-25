@@ -1,13 +1,9 @@
 import { actionTypes as types } from '../../../constants';
 
 const initialState = {
-    currentUser: {
-        login: '',
-        name: '',
-        password: '',
-        rights: '',
-        id: 0,
-    },
+    currentUser: {},
+
+    notification: '',
 };
 
 export const app = (state = initialState, action) => {

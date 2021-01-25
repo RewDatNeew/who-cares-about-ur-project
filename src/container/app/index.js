@@ -6,56 +6,50 @@ import { Switch, Route, Redirect } from 'react-router-dom';
 import { NotFoundPage } from "../../pages";
 import { SideBar } from "../sidebar";
 import Auth from "../auth";
-import { SnackbarProvider } from "notistack";
-import {useUpdateStore} from "../../hooks";
-import {actionTypes as types} from "../../constants";
+import { signOut } from "../auth/duck/action";
 import { isRight } from "../../helpers/isRight";
+import { useSnackbar } from "notistack";
 import './style.less';
 
 const AppContainer = (props) => {
   const {
       currentUser = {},
+      notification = '',
   } = props.app;
 
-  const updateStore = useUpdateStore({ type: types.APP_UPDATE })
+  const { enqueueSnackbar } = useSnackbar()
+
+
+    console.log({notification})
+
+  // const updateStore = useUpdateStore({ type: types.APP_UPDATE })
 
   const [isLogin, setIsLogin] = useState(false);
 
-  useEffect(() => {
-      const isLogin = localStorage.getItem('isLogin') === 'true';
+    useEffect(() => {
+        const isLogin = localStorage.getItem('isLogin') === 'true';
+        setIsLogin(isLogin);
+    }, [isLogin])
 
-      if (isLogin) {
-          const user = localStorage.getItem('user')
-          const parsedUser = JSON.parse(user)
-          const {
-              login = '', name = '', password = '', id = '', rights,
-          } = parsedUser
+  // TODO очищать уведомления
 
-          updateStore({
-              currentUser: {
-                  login,
-                  name,
-                  rights,
-                  password,
-                  id,
-              }
-          })
+  useEffect( () => {
+      if (notification !== '') {
+          enqueueSnackbar(notification || '')
       }
-
-      setIsLogin(isLogin);
-  }, [isLogin])
+  }, [notification])
 
   const logOut = () => {
+      props.dispatch(signOut())
       localStorage.clear();
       window.location.reload(false);
   }
 
-  const { rights = '' } = currentUser;
+  const { displayName = '', photoURL = '' } = currentUser;
   const rightsArr = [];
-  rightsArr.push(rights.toUpperCase())
+  rightsArr.push(photoURL.toUpperCase())
 
   return (
-      <SnackbarProvider maxSnack={3}>
           <div className="app-container">
             {!isLogin
                 ? <div className="auth-page">
@@ -63,7 +57,7 @@ const AppContainer = (props) => {
                   </div>
                 : <>
                     <div className="control-panel">
-                        <Header user={currentUser} logOut={logOut} />
+                        <Header displayName={displayName} logOut={logOut} />
                         <SideBar rightsArr={rightsArr} />
                     </div>
                     <div className="main">
@@ -104,7 +98,6 @@ const AppContainer = (props) => {
                 </>
             }
           </div>
-      </SnackbarProvider>
   );
 }
 

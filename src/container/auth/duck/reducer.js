@@ -1,14 +1,14 @@
 import { actionTypes as types } from '../../../constants';
 
 const initialState = {
-    authUsers: [],
     isLogin: false,
 
     isOpenSignInModal: false,
 
-    name: '',
+    displayName: '',
     password: '',
-    login: '',
+    email: '',
+
     rights: '',
 };
 

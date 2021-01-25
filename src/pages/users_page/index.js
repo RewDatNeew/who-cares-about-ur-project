@@ -1,8 +1,8 @@
-import React, { useEffect, useRef } from 'react';
+import React, {useEffect, useRef} from 'react';
 import { actionTypes as types } from '../../constants';
 import { connect } from 'react-redux';
 import { HeaderPage, IconButton, Pagination, Table } from "../../components";
-import {useInput, useUpdateStore} from "../../hooks";
+import {useInput, useNotification, useUpdateStore} from "../../hooks";
 import { isEmpty } from "../../helpers";
 import { getUsers, addUser, deleteUser, editUser } from "./duck/action";
 import { ConfigControl } from "./components/config-control";
@@ -73,6 +73,8 @@ const UsersPage = (props) => {
     const handleAddUser = async () => {
         await props.dispatch(addUser(user));
         handleGetUsers();
+        // eslint-disable-next-line react-hooks/rules-of-hooks
+        useNotification({message: `Пользователь добавлен`, dispatch: props.dispatch })
         handleCloseModal();
     }
 
@@ -81,6 +83,8 @@ const UsersPage = (props) => {
             id,
         } = row;
         await props.dispatch(deleteUser(id));
+        // eslint-disable-next-line react-hooks/rules-of-hooks
+        useNotification({message: `Пользователь удален`, dispatch: props.dispatch })
         handleGetUsers()
     }
 
@@ -92,6 +96,8 @@ const UsersPage = (props) => {
             age: age || currentUser.age,
         }
         await props.dispatch(editUser(editedUser));
+        // eslint-disable-next-line react-hooks/rules-of-hooks
+        useNotification({message: `Пользователь изменен`, dispatch: props.dispatch})
         await handleCloseModal();
         handleGetUsers()
     }

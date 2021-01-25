@@ -7,7 +7,7 @@ import { ChangePasswordModal } from "./modals";
 import {useInput, useUpdateStore} from "../../hooks";
 import { actionTypes as types } from "../../constants";
 import { useSnackbar } from "notistack";
-const bcrypt = require('bcryptjs');
+
 
 const ProfilePage = (props) => {
     const {
@@ -21,13 +21,7 @@ const ProfilePage = (props) => {
         isOpenPasswordModal = false,
         currentPassword = '',
         newPassword = '',
-        hashedPass = '',
-        isPass = false,
     } = props.profile;
-
-    const {
-        login, name, password, id
-    } = currentUser;
 
     const handleOpenPasswordModal = () => {
         updateStore({
@@ -59,55 +53,20 @@ const ProfilePage = (props) => {
         window.location.reload(false)
     }
 
-    const user = localStorage.getItem('user')
-    const parsedUser = JSON.parse(user)
-
-    const handleChangePassword = async () => {
-        const isPass = bcrypt.compareSync(currentPassword, parsedUser.password)
-        if (isPass) {
-            if (newPassword !== currentPassword) {
-                const user = {
-                    id,
-                    login: login,
-                    name: name,
-                    password: newPassword,
-                    rights: 'SIMPLE',
-                }
-                await props.dispatch(editUserPassword(user))
-                enqueueSnackbar(`Пароль успешно изменен`)
-
-                const storageUser = {
-                    id,
-                    password,
-                    login,
-                    name,
-                    rights: 'SIMPLE',
-                }
-                localStorage.setItem('user', JSON.stringify(storageUser))
-                handleCloseModal();
-                setTimeout(reloadPage, 3000)
-            } else {
-                enqueueSnackbar(`Новый пароль совпадает с текущим`)
-            }
-        } else {
-            enqueueSnackbar(`Введеный пароль не совпадает с текущим`)
-        }
-    }
-
     return (
         <div className="profile-page">
             <HeaderPage title={props.item.label} icon={props.item.icon} />
             <ChangePasswordModal
                 currentPasswordInput={currentPasswordInput}
                 newPasswordInput={newPasswordInput}
-                handleChangePassword={handleChangePassword}
+                // handleChangePassword={handleChangePassword}
                 isOpenPasswordModal={isOpenPasswordModal}
                 handleCloseModal={handleCloseModal}
             />
             <div className="current-user">
                 <div className="info">
-                    <span>Имя: {name}</span>
-                    <span>Логин: {login}</span>
+                    <span>Имя: {currentUser.displayName}</span>
+                    <span>e-mail: {currentUser.email}</span>
                 </div>
                 <div className="info-control">
                     <Button title="Change Password" onClick={handleOpenPasswordModal} />
