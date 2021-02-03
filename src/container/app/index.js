@@ -7,7 +7,7 @@ import { Switch, Route, Redirect } from 'react-router-dom';
 import { NotFoundPage } from "../../pages";
 import { SideBar } from "../sidebar";
 import Auth from "../auth";
-import { signOut } from "../auth/duck/action";
+import {signOut} from "../auth/duck/action";
 import { isRight } from "../../helpers/isRight";
 import { useSnackbar } from "notistack";
 import { useUpdateStore } from "../../hooks";
@@ -41,7 +41,7 @@ const AppContainer = (props) => {
       props.dispatch(signOut())
   }
 
-  const { displayName = '', photoURL = '' } = currentUser;
+  const { displayName = '', photoURL = '' } = currentUser?.user || {};
   const rightsArr = [];
   rightsArr.push(photoURL?.toUpperCase())
 
@@ -50,9 +50,7 @@ const AppContainer = (props) => {
   return (
           <div className="app-container">
             {!isUserLogged
-                ? <div className="auth-page">
-                    <Auth />
-                  </div>
+                ? <div className="auth-page"><Route render={(ren) => <Auth {...ren} />} /></div>
                 : <>
                     <div className="control-panel">
                         <Header displayName={displayName} logOut={logOut} />

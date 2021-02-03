@@ -1,11 +1,11 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import './style.less';
 import { Button, Icon } from "../../components";
 import { connect } from "react-redux";
-import { useInput, useUpdateStore, useNotification } from "../../hooks";
+import { useInput, useUpdateStore } from "../../hooks";
 import { actionTypes as types } from "../../constants";
-import { signInUser, signUpUser, authStateChange, changePassword } from "./duck/action";
-import {ResetPassModal, SignInModal} from "./modals";
+import { signInUser, signUpUser, changePassword } from "./duck/action";
+import { ResetPassModal, SignInModal } from "./modals";
 
 const Auth = (props) => {
     const {
@@ -15,10 +15,6 @@ const Auth = (props) => {
         isOpenResetPasswordModal = false,
         email,
     } = props.auth;
-
-    useEffect(() => {
-        props.dispatch(authStateChange())
-    }, [])
 
     const updateStore = useUpdateStore({ type: types.AUTH_UPDATE })
 
@@ -78,8 +74,6 @@ const Auth = (props) => {
                 displayName,
             }
         await props.dispatch(signUpUser(authUser));
-        // eslint-disable-next-line react-hooks/rules-of-hooks
-        useNotification({message: `Пользователь ${email} успешно создан`})
         handleCloseModal();
     }
 

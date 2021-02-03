@@ -9,20 +9,25 @@ export const signUpUser = (authUser) => {
 
     const rights = 'SIMPLE';
 
-    return async function () {
+    return async function (dispatch) {
         await fb.auth().createUserWithEmailAndPassword(email, password)
             .then((user) => {
-                console.log({user})
+                useNotification({message: `Пользователь ${user.user.email} успешно создан`, dispatch })
+                dispatch({
+                    type: types.APP_UPDATE,
+                    payload: {
+                        currentUser: {}
+                    },
+                });
             })
             .catch((error) => {
-                const errorCode = error.code;
                 const errorMessage = error.message;
-                console.log({errorCode, errorMessage})
+                useNotification({message: errorMessage, dispatch})
             });
 
         const user = fb.auth().currentUser;
 
-        await user.updateProfile({
+        await user?.updateProfile({
             displayName: displayName,
             photoURL: rights
         }).then(function() {
@@ -74,23 +79,23 @@ export const signOut = () => {
     }
 }
 
-export const authStateChange = () => {
-    return async function (dispatch) {
-        fb.auth().onAuthStateChanged((user) => {
-            if (user) {
-                dispatch({
-                    type: types.APP_UPDATE,
-                    payload: {
-                        currentUser: user
-                    },
-                });
-            } else {
-                // User is signed out
-                // ...
-            }
-        });
-    }
-}
+// export const authStateChange = () => {
+//     return async function (dispatch) {
+//         fb.auth().onAuthStateChanged((user) => {
+//             if (user) {
+//                 dispatch({
+//                     type: types.APP_UPDATE,
+//                     payload: {
+//                         currentUser: user
+//                     },
+//                 });
+//             } else {
+//                 // User is signed out
+//                 // ...
+//             }
+//         });
+//     }
+// }
 
 export const changePassword = (email) => {
     const auth = fb.auth();

@@ -3,13 +3,17 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { Route, BrowserRouter, Router } from 'react-router-dom';
 import { createBrowserHistory } from 'history';
-import store from './store';
+import factory from './store';
+import { PersistGate } from 'redux-persist/integration/react'
 import AppContainer from './container/app';
 import './styles/style.less';
 
 import firebase from "firebase/app";
 import "firebase/auth";
 import {SnackbarProvider} from "notistack";
+
+const { store, persistor } = factory();
+
 const firebaseConfig = {
     apiKey: "AIzaSyDydlBAU1xik5hpfZGIq5QH29N_Wti61_s",
     authDomain: "whocaresabouturproject.firebaseapp.com",
@@ -27,11 +31,13 @@ const history = createBrowserHistory();
 ReactDOM.render(
     <SnackbarProvider maxSnack={3}>
         <Provider store={store}>
-            <Router history={history}>
-                <BrowserRouter basename={`wcaup/`}>
-                    <Route path="/" component={AppContainer} />
-                </BrowserRouter>
-            </Router>
+            <PersistGate loading={null} persistor={persistor}>
+                <Router history={history}>
+                    <BrowserRouter basename={`wcaup/`}>
+                        <Route path="/" component={AppContainer} />
+                    </BrowserRouter>
+                </Router>
+            </PersistGate>
         </Provider>
     </SnackbarProvider>,
   document.getElementById('root')

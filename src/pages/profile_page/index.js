@@ -54,8 +54,8 @@ const ProfilePage = (props) => {
             />
             <div className="current-user">
                 <div className="info">
-                    <span>Имя: {currentUser.displayName}</span>
-                    <span>e-mail: {currentUser.email}</span>
+                    <span>Имя: {currentUser.user.displayName}</span>
+                    <span>e-mail: {currentUser.user.email}</span>
                 </div>
                 <div className="info-control">
                     <Button title="Change Password" onClick={handleOpenPasswordModal} />
