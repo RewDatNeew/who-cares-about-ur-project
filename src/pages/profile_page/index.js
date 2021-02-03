@@ -9,8 +9,8 @@ import { changeUserPassword } from "./duck/action";
 
 const ProfilePage = (props) => {
     const {
-        currentUser = {}
-    } = props.app;
+        currentLoggedUser = {}
+    } = props.currentUser;
 
     const updateStore = useUpdateStore({ type: types.PROFILE_UPDATE })
 
@@ -54,8 +54,8 @@ const ProfilePage = (props) => {
             />
             <div className="current-user">
                 <div className="info">
-                    <span>Имя: {currentUser.user.displayName}</span>
-                    <span>e-mail: {currentUser.user.email}</span>
+                    <span>Имя: {currentLoggedUser.displayName}</span>
+                    <span>e-mail: {currentLoggedUser.email}</span>
                 </div>
                 <div className="info-control">
                     <Button title="Change Password" onClick={handleOpenPasswordModal} />
@@ -68,6 +68,6 @@ const ProfilePage = (props) => {
 export default connect((store) => {
     return {
         profile: store.profile,
-        app: store.app,
+        currentUser: store.currentUser,
     }
 })(ProfilePage)

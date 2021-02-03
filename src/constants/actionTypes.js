@@ -10,3 +10,5 @@ export const USERS_UPDATE = 'USERS_UPDATE';
 
 export const ADMIN_UPDATE = 'ADMIN_UPDATE';
 
+export const CURRENT_USER_UPDATE = 'CURRENT_USER_UPDATE';
+

@@ -46,10 +46,25 @@ export const signInUser = (authUser) => {
     return async function (dispatch) {
         await fb.auth().signInWithEmailAndPassword(email, password)
             .then((user) => {
+                const {
+                    displayName,
+                    photoURL,
+                    email,
+                } = user.user;
                 dispatch({
                     type: types.APP_UPDATE,
                     payload: {
                         currentUser: user
+                    },
+                });
+                dispatch({
+                    type: types.CURRENT_USER_UPDATE,
+                    payload: {
+                        currentLoggedUser: {
+                            displayName: displayName,
+                            email: email,
+                            rights: photoURL,
+                        }
                     },
                 });
             })
@@ -73,6 +88,12 @@ export const signOut = () => {
                     currentUser: {}
                 },
             });
+            dispatch({
+                type: types.CURRENT_USER_UPDATE,
+                payload: {
+                    currentLoggedUser: {}
+                }
+            })
         }).catch((error) => {
             console.log({error})
         });

@@ -15,9 +15,12 @@ import './style.less';
 
 const AppContainer = (props) => {
   const {
-      currentUser = {},
       notification = {},
   } = props.app;
+
+  const {
+      currentLoggedUser = {}
+  } = props.currentUser;
 
   const { enqueueSnackbar } = useSnackbar()
 
@@ -41,11 +44,11 @@ const AppContainer = (props) => {
       props.dispatch(signOut())
   }
 
-  const { displayName = '', photoURL = '' } = currentUser?.user || {};
+  const { displayName = '', rights = '' } = currentLoggedUser || {};
   const rightsArr = [];
-  rightsArr.push(photoURL?.toUpperCase())
+  rightsArr.push(rights?.toUpperCase())
 
-  const isUserLogged = Object.keys(currentUser).length !== 0;
+  const isUserLogged = Object.keys(currentLoggedUser).length !== 0;
 
   return (
           <div className="app-container">
@@ -100,5 +103,6 @@ const AppContainer = (props) => {
 export default connect((store) => {
     return {
         app: store.app,
+        currentUser: store.currentUser,
     }
 })(AppContainer)

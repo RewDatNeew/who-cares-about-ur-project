@@ -1,19 +1,16 @@
 import { actionTypes as types } from '../../../constants';
 
 const initialState = {
-    isOpenSignInModal: false,
-    isOpenResetPasswordModal: false,
-
-    displayName: '',
-    password: '',
-    email: '',
-
-    rights: '',
+    currentLoggedUser: {
+        displayName: '',
+        rights: '',
+        email: '',
+    }
 };
 
-export const auth = (state = initialState, action) => {
+export const currentUser = (state = initialState, action) => {
     switch (action.type) {
-        case types.AUTH_UPDATE: {
+        case types.CURRENT_USER_UPDATE: {
             return {
                 ...state,
                 ...action.payload,
