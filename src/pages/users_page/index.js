@@ -1,7 +1,7 @@
 import React, {useEffect, useRef} from 'react';
 import { actionTypes as types } from '../../constants';
 import { connect } from 'react-redux';
-import { HeaderPage, IconButton, Pagination, Table } from "../../components";
+import {HeaderPage, IconButton, Pagination, Table, Tooltip} from "../../components";
 import {useInput, useNotification, useUpdateStore} from "../../hooks";
 import { isEmpty } from "../../helpers";
 import { getUsers, addUser, deleteUser, editUser } from "./duck/action";
@@ -148,10 +148,14 @@ const UsersPage = (props) => {
             return (
                 <>
                     <td>
-                        <IconButton name="edit" fill="#f0f8ff" onClick={() => handleOpenEdition(row)} />
+                        <Tooltip tooltipLabel="Изменить" position="left">
+                            <IconButton name="edit" fill="#939597" onClick={() => handleOpenEdition(row)} />
+                        </Tooltip>
                     </td>
                     <td>
-                        <IconButton name="delete" fill="#f0f8ff" onClick={() => handleDeleteRow(row)} />
+                        <Tooltip tooltipLabel="Удалить" position="left">
+                        <IconButton name="delete" fill="#939597" onClick={() => handleDeleteRow(row)} />
+                        </Tooltip>
                     </td>
                 </>
             );

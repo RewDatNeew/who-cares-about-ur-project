@@ -10,8 +10,8 @@ export const Header = (props) => {
         handleSendVerification = () => console.log('handleSendVerification'),
     } = props;
 
-    const verificationStyleName = emailVerified ? { color: '#f0f8ff' } : { color: '#ffcccb' }
-    const verificationStyleIcon = emailVerified ? '#f0f8ff' : '#ffcccb';
+    const verificationStyleName = emailVerified ? { color: '#939597' } : { color: '#ffcccb' }
+    const verificationStyleIcon = emailVerified ? '#939597' : '#ffcccb';
     const userVerificationTooltip = emailVerified ? "Пользователь верифицирован" : "Пользователь не верифицирован"
 
     return (
@@ -36,12 +36,12 @@ export const Header = (props) => {
                                     <IconButton
                                     name="send-verification"
                                     onClick={handleSendVerification}
-                                    fill="#f0f8ff"/>
+                                    fill="#939597"/>
                                 </Tooltip>
                                 : null
                         }
                         <Tooltip tooltipLabel="Выйти" position="right">
-                            <IconButton name="log-out" onClick={logOut} fill="#f0f8ff" />
+                            <IconButton name="log-out" onClick={logOut} fill="#939597" />
                         </Tooltip>
                     </div>
         </div>
