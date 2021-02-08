@@ -5,6 +5,7 @@ const initialState = {
         displayName: '',
         rights: '',
         email: '',
+        emailVerified: false,
     }
 };
 

@@ -50,6 +50,7 @@ export const signInUser = (authUser) => {
                     displayName,
                     photoURL,
                     email,
+                    emailVerified,
                 } = user.user;
                 dispatch({
                     type: types.APP_UPDATE,
@@ -64,6 +65,7 @@ export const signInUser = (authUser) => {
                             displayName: displayName,
                             email: email,
                             rights: photoURL,
+                            emailVerified: emailVerified,
                         }
                     },
                 });
@@ -100,23 +102,35 @@ export const signOut = () => {
     }
 }
 
-// export const authStateChange = () => {
-//     return async function (dispatch) {
-//         fb.auth().onAuthStateChanged((user) => {
-//             if (user) {
-//                 dispatch({
-//                     type: types.APP_UPDATE,
-//                     payload: {
-//                         currentUser: user
-//                     },
-//                 });
-//             } else {
-//                 // User is signed out
-//                 // ...
-//             }
-//         });
-//     }
-// }
+export const authStateChange = () => {
+    return async function (dispatch) {
+        fb.auth().onAuthStateChanged((user) => {
+            if (user) {
+                dispatch({
+                    type: types.APP_UPDATE,
+                    payload: {
+                        currentUser: user
+                    },
+                });
+            } else {
+                // User is signed out
+                // ...
+            }
+        });
+    }
+}
+
+export const sendUserEmailVerification = () => {
+    const user = fb.auth().currentUser;
+    return async function (dispatch) {
+        user.sendEmailVerification().then(function() {
+            useNotification({message: 'Письмо с верификацией почты отправлено', dispatch})
+            useNotification({message: 'После успешной верификации перезайдите в аккаунт', dispatch})
+        }).catch(function(error) {
+            // An error happened.
+        })
+    }
+}
 
 export const changePassword = (email) => {
     const auth = fb.auth();
