@@ -8,7 +8,7 @@ export const ItemNavigation = (props) => {
                 to={`${path}`}
                 title={label}
                 activeStyle={{
-                    color: "#F5DF4D"
+                    color: "#222830"
                 }}
             >
                 <div className="link">
