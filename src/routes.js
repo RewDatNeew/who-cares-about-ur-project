@@ -26,7 +26,7 @@ export const routes = [
         icon: <Icon name="users" />,
         label: 'Таблица Пользователей',
         path: '/users-page',
-        info: 'Таблица с функциями создания, удаления, изменения и поиска сущности',
+        info: 'Таблица с функциями создания, удаления, изменения и поиска несуществующих сущностей',
         rights: [special.SIMPLE, special.ADMIN],
     },
     {

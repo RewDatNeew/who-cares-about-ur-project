@@ -1,6 +1,7 @@
 import { actionTypes as types } from '../../../constants';
 
 const initialState = {
+    usersList: [],
 };
 
 export const admin = (state = initialState, action) => {
