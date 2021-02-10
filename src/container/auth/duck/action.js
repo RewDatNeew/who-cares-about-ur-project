@@ -82,7 +82,7 @@ export const signInUser = (authUser) => {
 export const signOut = () => {
     return async function (dispatch) {
         await fb.auth().signOut().then(() => {
-            useNotification({message: 'Sign-out successful', dispatch})
+            useNotification({message: 'Выход из аккаунта выполнен успешно', dispatch})
             console.log('Sign-out successful')
             dispatch({
                 type: types.APP_UPDATE,
@@ -124,10 +124,10 @@ export const sendUserEmailVerification = () => {
     const user = fb.auth().currentUser;
     return async function (dispatch) {
         user.sendEmailVerification().then(function() {
-            useNotification({message: 'Письмо с верификацией почты отправлено', dispatch})
-            useNotification({message: 'После успешной верификации перезайдите в аккаунт', dispatch})
+            useNotification({message: 'Письмо с верификацией отправлено. ' +
+                    'После успешной верификации перезайдите в аккаунт', dispatch})
         }).catch(function(error) {
-            // An error happened.
+            useNotification({message: 'Письмо уже отправлено!', dispatch})
         })
     }
 }
@@ -138,7 +138,7 @@ export const changePassword = (email) => {
         auth.sendPasswordResetEmail(email).then(function() {
             useNotification({message: 'Письмо с восстановлением отправлено', dispatch})
         }).catch(function(error) {
-            // An error happened.
+            useNotification({message: 'Ошибка', dispatch})
         });
     }
 }

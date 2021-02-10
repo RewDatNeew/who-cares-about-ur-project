@@ -173,15 +173,17 @@ const UsersPage = (props) => {
                 searchInput={searchInput}
                 handleOpenAdding={handleOpenAdding}
             />
-            <Pagination
-            />
-            {!isEmpty(users) ? <Table
-                cells={cells}
-                data={users}
-                searchResult={searchResult}
-                addThs={addThs}
-                customTd={customTd}
-            /> : null}
+            {/*<Pagination*/}
+            {/*/>*/}
+            <div className="users-page-table">
+                {!isEmpty(users) ? <Table
+                    cells={cells}
+                    data={users}
+                    searchResult={searchResult}
+                    addThs={addThs}
+                    customTd={customTd}
+                /> : null}
+            </div>
             <ModalAdd
                 isOpenModalAdd={isOpenModalAdd}
                 nameInput={nameInput}
