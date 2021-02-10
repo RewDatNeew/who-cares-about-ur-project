@@ -50,8 +50,6 @@
   "devDependencies": {
     "@babel/plugin-proposal-export-default-from": "^7.12.1",
     "customize-cra": "^1.0.0",
-    "firebase-admin": "^9.4.2",
-    "firebase-functions": "^3.13.1",
     "history": "^5.0.0",
     "less": "^4.0.0",
     "less-loader": "^7.2.1",
