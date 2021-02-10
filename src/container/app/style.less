@@ -1,28 +1,17 @@
 .app-container {
   box-shadow: 0 0 5px #F5DF4D;
-  //background: linear-gradient(45deg, rgba(60, 66, 67, 0.6), rgba(139, 147, 154, 0.3));
   backdrop-filter: blur(1rem);
-  //border-radius: 2rem;
-  //min-height: 80vh;
-  //width: 85%;
   min-height: 100vh;
   width: 100%;
   display: flex;
+  flex-direction: column;
   z-index: 3;
   .control-panel {
     display: flex;
-    width: 230px;
-    flex-direction: column;
-    //border-radius: 2rem;
+    flex-direction: row;
     box-shadow: 0 0 5px #222830;
     align-items: center;
-    .header {
-      align-items: center;
-      flex-direction: column;
-      display: flex;
-      justify-content: space-evenly;
-      padding: 1rem
-    }
+    height: 50px;
   }
   .main {
     flex: 2;
@@ -34,4 +23,5 @@
   width: 100%;
   align-items: center;
   justify-content: center;
+  height: 100vh;
 }

@@ -154,7 +154,7 @@ const UsersPage = (props) => {
                     </td>
                     <td>
                         <Tooltip tooltipLabel="Удалить" position="left">
-                        <IconButton name="delete" fill="#939597" onClick={() => handleDeleteRow(row)} />
+                            <IconButton name="delete" fill="#939597" onClick={() => handleDeleteRow(row)} />
                         </Tooltip>
                     </td>
                 </>

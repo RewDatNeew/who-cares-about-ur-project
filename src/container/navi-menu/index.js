@@ -4,10 +4,10 @@ import { ItemNavigation } from "./item_navigation";
 import './style.less'
 import { isRight } from "../../helpers/isRight";
 
-export const SideBar = (props) => {
+export const NaviMenu = (props) => {
     const { rightsArr = [] } = props;
     return (
-        <div className="sidebar">
+        <div className="navi-menu">
             <nav>
                 <ul className="list">
                     {routes

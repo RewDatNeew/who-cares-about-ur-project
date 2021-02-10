@@ -1,4 +1,13 @@
 .header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 100%;
+  justify-content: space-between;
+  .project-navi {
+    display: flex;
+    align-items: center;
+    padding-left: 1rem;
     .project-title {
       display: flex;
       color: #222830;
@@ -7,11 +16,12 @@
         font-size: 20px;
       }
     }
+  }
     .user-control {
       display: flex;
       flex-direction: row;
       align-items: center;
-      padding-left: 1rem;
+      padding-right: 1rem;
       .current-user {
         display: flex;
         padding-bottom: .2rem;

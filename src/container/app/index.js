@@ -5,7 +5,6 @@ import { connect } from "react-redux";
 import { Header } from "../header";
 import { Switch, Route, Redirect } from 'react-router-dom';
 import { NotFoundPage } from "../../pages";
-import { SideBar } from "../sidebar";
 import Auth from "../auth";
 import {signOut,authStateChange,sendUserEmailVerification} from "../auth/duck/action";
 import { isRight } from "../../helpers/isRight";
@@ -16,10 +15,8 @@ import './style.less';
 const AppContainer = (props) => {
   const {
       notification = {},
-      currentUser = {},
   } = props.app;
 
-  console.log({currentUser})
   const {
       currentLoggedUser = {}
   } = props.currentUser;
@@ -72,8 +69,8 @@ const AppContainer = (props) => {
                             logOut={logOut}
                             emailVerified={emailVerified}
                             handleSendVerification={handleSendVerification}
+                            rightsArr={rightsArr}
                         />
-                        <SideBar rightsArr={rightsArr} />
                     </div>
                     <div className="main">
                         <div className="component">
