@@ -14,9 +14,9 @@ export const ModalEdit = (props) => {
         <>
         {isOpenModalEdit
             ? <Modal
-                title="Edit User"
+                title="Изменить пользователя"
                 width="400px"
-                actionTitle="Edit user"
+                actionTitle="Изменить"
                 modalAction={handleEditUser}
                 closeModal={handleCloseModal}
             >

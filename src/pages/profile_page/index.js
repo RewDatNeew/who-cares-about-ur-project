@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from "react-redux";
 import './style.less';
-import { HeaderPage, Button } from "../../components";
+import {HeaderPage, Button, Config} from "../../components";
 import { ChangePasswordModal } from "./modals";
 import {useInput, useUpdateStore} from "../../hooks";
 import { actionTypes as types } from "../../constants";
@@ -35,7 +35,7 @@ const ProfilePage = (props) => {
         type: 'password',
         updateStore,
         name: 'newPassword',
-        label: 'New Password'
+        label: 'Новый Пароль'
     })
 
     const handleChangePassword = () => {
@@ -45,22 +45,24 @@ const ProfilePage = (props) => {
 
     return (
         <div className="profile-page">
-            <HeaderPage title={props.item.label} icon={props.item.icon} />
+            <HeaderPage title={props.item.label} icon={props.item.icon} info={props.item.info} />
             <ChangePasswordModal
                 newPasswordInput={newPasswordInput}
                 handleChangePassword={handleChangePassword}
                 isOpenPasswordModal={isOpenPasswordModal}
                 handleCloseModal={handleCloseModal}
             />
+            <Config headerTitle='Информация и настройка профиля' iconName="settings">
             <div className="current-user">
                 <div className="info">
-                    <span>Имя: {currentLoggedUser.displayName}</span>
-                    <span>e-mail: {currentLoggedUser.email}</span>
+                    <span>Имя: <span className="item">{currentLoggedUser.displayName}</span></span>
+                    <span>e-mail: <span className="item">{currentLoggedUser.email}</span></span>
                 </div>
                 <div className="info-control">
-                    <Button title="Change Password" onClick={handleOpenPasswordModal} />
+                    <Button title="Изменить пароль" onClick={handleOpenPasswordModal} />
                 </div>
             </div>
+            </Config>
         </div>
     )
 }

@@ -9,11 +9,11 @@ export const ConfigControl = (props) => {
     } = props;
 
     return (
-        <Config headerTitle='Config' iconName="settings">
+        <Config headerTitle='Конфигуратор' iconName="settings">
             <div className="config">
-                {searchInput}
-                <div>
-                    <Button title="Add User" onClick={handleOpenAdding} />
+                <div className="input-zone">{searchInput}</div>
+                <div className="button-zone">
+                    <Button title="Создать пользователя" onClick={handleOpenAdding} />
                 </div>
             </div>
         </Config>

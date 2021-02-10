@@ -16,7 +16,8 @@ import { ReactComponent as LogOutIcon } from './../../svg/logout.svg';
 import { ReactComponent as EyeIcon } from './../../svg/eye.svg';
 import { ReactComponent as EyeNonIcon } from './../../svg/eye-non.svg';
 import { ReactComponent as AdminIcon } from './../../svg/admin.svg';
-import { ReactComponent as SendVerification } from './../../svg/send-verification.svg';
+import { ReactComponent as SendVerificationIcon } from './../../svg/send-verification.svg';
+import { ReactComponent as InfoIcon } from './../../svg/info.svg';
 
 
 export const Icon = ({ size = '1em', fill = 'currentColor', name, cn = '' }) => {
@@ -37,7 +38,8 @@ export const Icon = ({ size = '1em', fill = 'currentColor', name, cn = '' }) => 
         eye: EyeIcon,
         'eye-non': EyeNonIcon,
         admin: AdminIcon,
-        'send-verification': SendVerification,
+        'send-verification': SendVerificationIcon,
+        info: InfoIcon,
     }[name];
 
     return (

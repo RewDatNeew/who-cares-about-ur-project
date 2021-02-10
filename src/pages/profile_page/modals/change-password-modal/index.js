@@ -14,8 +14,8 @@ export const ChangePasswordModal = (props) => {
                 isOpenPasswordModal
                 ? <Modal
                     width="400px"
-                    title="Change Password"
-                    actionTitle="Change Password"
+                    title="Изменить пароль"
+                    actionTitle="Изменить"
                     modalAction={handleChangePassword}
                     closeModal={handleCloseModal}>
                     <div className="modal-input-zone">

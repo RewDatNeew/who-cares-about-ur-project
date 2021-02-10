@@ -10,7 +10,7 @@ const HomePage = (props) => {
         <div className="home-page">
             <HeaderPage title={props.item.label} icon={props.item.icon} />
             <div className="content">
-                <span>Welcome, my little friend! :)</span>
+                <span>Хелоу! :)</span>
             </div>
         </div>
     )

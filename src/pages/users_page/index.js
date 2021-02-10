@@ -49,18 +49,18 @@ const UsersPage = (props) => {
     const nameInput = useInput({
         updateStore,
         name: 'name',
-        label: 'Name'
+        label: 'Имя'
     })
     const locationInput = useInput({
         updateStore,
         name: 'location',
-        label: 'location'
+        label: 'Город'
     })
     const ageInput = useInput({
         type: 'number',
         updateStore,
         name: 'age',
-        label: 'age'
+        label: 'Возраст'
     })
 
     const user = {
@@ -120,20 +120,20 @@ const UsersPage = (props) => {
         currentValue: currentUser.name,
         updateStore,
         name: 'name',
-        label: 'Name'
+        label: 'Имя'
     })
     const editLocationInput = useInput({
         currentValue: currentUser.location,
         updateStore,
         name: 'location',
-        label: 'location'
+        label: 'Город'
     })
     const editAgeInput = useInput({
         currentValue: currentUser.age,
         type: 'number',
         updateStore,
         name: 'age',
-        label: 'age'
+        label: 'Возраст'
     })
 
     const handleOpenAdding = () => {
@@ -168,7 +168,7 @@ const UsersPage = (props) => {
 
     return (
         <div className="users-page">
-            <HeaderPage title={props.item.label} icon={props.item.icon} />
+            <HeaderPage title={props.item.label} icon={props.item.icon} info={props.item.info} />
             <ConfigControl
                 searchInput={searchInput}
                 handleOpenAdding={handleOpenAdding}

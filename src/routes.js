@@ -8,29 +8,33 @@ export const routes = [
     {
         component: HomePage,
         icon: <Icon name="home" />,
-        label: 'Home',
+        label: 'Дом',
         path: '/home',
+        info: '',
         rights: [special.SIMPLE, special.ADMIN],
     },
     {
         component: ProfilePage,
         icon: <Icon name="user" />,
-        label: 'Profile Page',
+        label: 'Профиль',
         path: '/profile-page',
+        info: 'Ваш профиль. Можно ознакомиться с информацией о профиле и изменить пароль',
         rights: [special.SIMPLE, special.ADMIN],
     },
     {
         component: UsersPage,
         icon: <Icon name="users" />,
-        label: 'Users Page',
+        label: 'Таблица Пользователей',
         path: '/users-page',
+        info: 'Таблица с функциями создания, удаления, изменения и поиска сущности',
         rights: [special.SIMPLE, special.ADMIN],
     },
     {
         component: AdministrationPage,
         icon: <Icon name="admin" />,
-        label: 'Administration Page',
+        label: 'Админка',
         path: '/admin-page',
+        info: '',
         rights: [special.ADMIN],
     }
 ]
